@@ -10,7 +10,7 @@ Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvolj
 - **Izlaz:** 8-bitni Avalon ST interfejs koji generiše niz ćelija fiksne dužine (64 bajta).
 - **Proces:**
   - Paket se dijeli na ćelije od 64 bajta.
-  - Broj ćelija, \( N \), definisan je kao \( N = [\text{Veličina paketa} / 64 ]
+  - Broj ćelija, \( N \), definisan je kao \( N = [{Veličina paketa} / 64 ]
   - Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa.
   - Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta.
 - **Signalizacija:**
