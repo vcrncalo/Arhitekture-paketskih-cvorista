@@ -1,4 +1,4 @@
-# Arhitekture-paketskih-čvorišta
+# Arhitekture paketskih čvorišta
  Projekat : Konverter paketa u ćelije
 ## Opis projekta
 
