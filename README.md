@@ -22,7 +22,7 @@ Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvolj
 
 ### Avalon ST interfejs
 
-`Avalon streaming interfejs (Avalon ST)` je interfejs koji podržava jednosmjerni tok podataka, uključujući multipleksirane tokove, pakete i DSP podatke. [^1]
+**`Avalon streaming interfejs (Avalon ST)`** je interfejs koji podržava jednosmjerni tok podataka, uključujući multipleksirane tokove, pakete i DSP podatke. [^1]
 
 Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih modula, koji se zovu komponente. "System designer" omogućava konfigurisanje komponenata i njihovo povezivanje kako bi se implementirao sistemi. [^1]
 
@@ -40,7 +40,13 @@ Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih 
 
 Kada je u pitanju grafik sa zero padding-om, karakteristično je to što se veličina length signala promijeni sa 128 na 120. Pored prethodno spomenutog, ZP se pojavljuje umjesto D16 u data signalu.
 
-`Zero padding` je tehnika koja se obično koristi u obradi digitalnih signala kako bi se standardizirale dimenzije, osigurale optimalne performanse i očuvala prvobitna struktura ulaznih podataka. Ova tehnika podrazumijeva dodavanje nula ulaznim podacima kako bi se osiguralo da podaci imaju specifičan oblik koji je pogodan za daljnju obradu. Iako ova tehnika dodatno opterećuje procesor, to je gotovo neznatno i prednosti kao što su očuvanje veličine podataka i povećana preciznost analize podataka čine ovu tehniku neophodnom. [^2]
+**`Zero padding`** je tehnika koja se obično koristi u obradi digitalnih signala kako bi se standardizirale dimenzije, osigurale optimalne performanse i očuvala prvobitna struktura ulaznih podataka. Ova tehnika podrazumijeva dodavanje nula ulaznim podacima kako bi se osiguralo da podaci imaju specifičan oblik koji je pogodan za daljnju obradu. Iako ova tehnika dodatno opterećuje procesor, to je gotovo neznatno i prednosti kao što su očuvanje veličine podataka i povećana preciznost analize podataka čine ovu tehniku neophodnom. [^2]
+
+#### Grafik sa backpressure-om
+
+<img src="WaveDrom/Backpressure_WD.png" alt="WaveDrom grafik backpressure">
+
+**`Backpressure`** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
 
 #### Signali 8-bitnog Avalon ST interfejsa
 
@@ -61,4 +67,5 @@ Kada je u pitanju grafik sa zero padding-om, karakteristično je to što se veli
 
 [^1]: © Intel Corporation. [Intel Avalon-ST Interface](https://www.intel.com/content/www/us/en/docs/programmable/683647/18-0/avalon-st-interface.html)
 [^2]: GeeksForGeeks Sanchhaya Education Private Limited, (17 Sep, 2024). [GeeksForGeeks - Zero Padding in Deep Learing and Signal Processing](https://www.geeksforgeeks.org/zero-padding-in-deep-learning-and-signal-processing/)
+[^3]: © Intel Corporation. [intel.com backpressure](https://www.intel.com/content/www/us/en/docs/programmable/683130/22-2/backpressure.html)
 
