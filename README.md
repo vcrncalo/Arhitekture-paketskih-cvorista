@@ -1,67 +1,77 @@
-# Arhitekture paketskih čvorišta
- Projekat: Konverter paketa u ćelije
+# Arhitekture paketskih čvorišta - Konverter paketa u ćelije
+
 ## Opis projekta
 
 Cilj ovog projekta je modeliranje i implementacija sklopa za konverziju paketa u ćelije. 
-Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvoljne dužine (64-1500 bajta) i generiše izlazni tok fiksnih ćelija dužine 64 bajta. 
+Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvoljne dužine (64 - 1500 bajta) i generiše izlazni tok fiksnih ćelija dužine 64 bajta. 
 
 ### Specifikacija:
 
 - **Ulaz:** 8-bitni Avalon ST interfejs koji prima Ethernet pakete.
 - **Izlaz:** 8-bitni Avalon ST interfejs koji generiše niz ćelija fiksne dužine (64 bajta).
 - **Proces:**
-  - Paket se dijeli na ćelije od 64 bajta.
-  - Broj ćelija, \( N \), definisan je kao \( N = [{Veličina paketa} / 64 ]
-  - Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa.
-  - Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta.
+	 - Paket se dijeli na ćelije od 64 bajta.
+	- Broj ćelija, \(N\), definisan je kao \(N\) = {[Veličina paketa] / 64}
+	- Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa.
+	- Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta.
 - **Signalizacija:**
-  - Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet).
-  - Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži:
-    - Redni broj paketa.
-    - Redni broj ćelije unutar paketa.
+	- Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet).
+	- Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži:
+		- Redni broj paketa.
+		- Redni broj ćelije unutar paketa.
 
 ### Avalon ST interfejs
 
-**`Avalon streaming interfejs (Avalon ST)`** je interfejs koji podržava jednosmjerni tok podataka, uključujući multipleksirane tokove, pakete i DSP podatke. [^1]
+**Avalon streaming interfejs (Avalon ST)** je interfejs koji podržava jednosmjerni tok podataka, uključujući multipleksirane tokove, pakete i DSP podatke. [^1]
 
-Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih modula, koji se zovu komponente. "System designer" omogućava konfigurisanje komponenata i njihovo povezivanje kako bi se implementirao sistemi. [^1]
+Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih modula, koji se zovu komponente. "System designer" omogućava konfigurisanje komponenata i njihovo povezivanje kako bi se implementirao sistem. [^1]
 
 ### WaveDrom
 
-#### Grafik:
+#### Prva verzija
 
-<img src="WaveDrom/wavedrom.png" alt="WaveDrom grafik"/>
+*Prva verzija dobijenog grafika prikazana je na grafiku ispod:*
 
-#### Grafik sa zero padding-om:
+<img src="WaveDrom/Prva_verzija/Prva_verzija_WD.png" alt="WaveDrom grafik prva verzija"/>
 
-<img src="WaveDrom/ZeroPadding.png" alt="WaveDrom grafik zero padding"/>
+<p align="center"><em>WaveDrom grafik - Prva verzija</em></p>
+
+Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi pojednostavljenja grafika se ne prikazuju svi podaci koji se prenose. Kod `source_channel` signala možemo vidjeti tri vrijednosti koje su različito obojene. Žuta boja predstavlja pri kanal dok plava predstavlja drugi kanal, ali se to može i zaključiti na osnovu toga kako su ti kanali označeni: (`0x00000101`, `0x00000202`, `0x00000202`), dakle, 101 - prvi kanal, 201 - drugi kanal, 202 - drugi dio drugog kanala.
+
+#### Signali prve verzije grafika:
+
+*WaveDrom grafik 8-bitnog Avalon ST interfejsa koji konvertuje pakete u ćelije se sastoji od sljedećih signala:*
+
+- `clk` - Takt signal sistema koji usklađuje sve operacije;
+- `reset` - Signal za resetiranje koji sistem vraća u početno stanje;
+- `sink_valid` - Označava da su ulazni podaci validni;
+- `sink_ready` - Označava da je "sink" modul spreman primiti podatke;
+- `sink_data[7:0]` - 8-bitni podatkovni signal na "sink" strani Avalon ST interfejsa. Služi za prijenos payload-a tokom svakog takta;
+- `sink_sop` - Ovaj signal označava prvi takt podatkovnog paketa koji ulazi u interfejs, tj. početak paketa;
+- `sink_eop` - Ovo je posljednji takt podatkovnog paketa, označava gdje se završava paket;
+- `source_cell` - Prenosi podatke u formatu ćelija koje su kreirane iz ulaznih paketa;
+- `source_eoc` - Ovaj signal označava kraj generisane ćelije;
+- `source_channel` - Omogućava višekanalni prijenos podataka. To je signal koji označava identifikator kanala sa kojeg podaci dolaze.
+
+#### Zero padding
+
+ **Zero padding** je tehnika koja se obično koristi u obradi digitalnih signala kako bi se standardizirale dimenzije, osigurale optimalne performanse i očuvala prvobitna struktura ulaznih podataka. Ova tehnika podrazumijeva dodavanje nula ulaznim podacima kako bi se osiguralo da podaci imaju specifičan oblik koji je pogodan za daljnju obradu. Iako ova tehnika dodatno opterećuje procesor, to je gotovo neznatno i prednosti kao što su očuvanje veličine podataka i povećana preciznost analize podataka čine ovu tehniku neophodnom. [^2]
+
+<img src="WaveDrom/Zero_padding/ZeroPadding_verzija_WD.png" alt="WaveDrom grafik zero padding"/>
+
+<p align="center"><em>WaveDrom grafik - Zero padding</em></p>
 
 <!-- Također se može koristiti ![tekst](lokacija_slike.png) za umetanje slike u README.md -->
 
-Kada je u pitanju grafik sa zero padding-om, karakteristično je to što se veličina length signala promijeni sa 128 na 120. Pored prethodno spomenutog, ZP se pojavljuje umjesto D16 u data signalu.
+<img src="WaveDrom/Zero_padding/63B/63B-ZP-a_verzija_WD.png" alt="WaveDrom grafik zero padding 63B">
 
-**`Zero padding`** je tehnika koja se obično koristi u obradi digitalnih signala kako bi se standardizirale dimenzije, osigurale optimalne performanse i očuvala prvobitna struktura ulaznih podataka. Ova tehnika podrazumijeva dodavanje nula ulaznim podacima kako bi se osiguralo da podaci imaju specifičan oblik koji je pogodan za daljnju obradu. Iako ova tehnika dodatno opterećuje procesor, to je gotovo neznatno i prednosti kao što su očuvanje veličine podataka i povećana preciznost analize podataka čine ovu tehniku neophodnom. [^2]
+<p align="center"><em>WaveDrom grafik - Zero padding (63B)</em></p>
 
-#### Grafik sa backpressure-om
+U oba grafika zero padding-a, neobojene ćelije predstavljaju zero padding.
 
-<img src="WaveDrom/Backpressure_WD.png" alt="WaveDrom grafik backpressure">
+#### Backpressure
 
-**`Backpressure`** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
-
-#### Signali 8-bitnog Avalon ST interfejsa
-
-<u>_WaveDrom grafik 8-bitnog Avalon ST interfejsa koji konvertuje pakete u ćelije se sastoji od sljedećih signala:_</u>
-
-- **`clk`** - Takt signal sistema koji usklađuje sve operacije;
-- **`reset`** - Signal za resetiranje koji sistem vraća u početno stanje;
-- **`length`** - Ovaj signal označava veličinu podatkovnog paketa;
-- **`start`** - Signal koji označava početak prijenosa podataka;
-- **`data`** - Signal koji označava podatke koji se prenose;
-- **`valid`** - Kada je ovaj signal aktivan, to znači da su podaci u data signalu ispravni i da se mogu koristiti od strane odredišta;
-- **`startofpacket`** - Signal koji označava početak prijenosa paketa;
-- **`endofpacket`** - Signal koji označava kraj prijenosa paketa;
-- **`channel`** - Signal koji označava kanal koji se prenosi;
-- **`ready`** - Signal koji označava da je odredište spremno primiti podatke. 
+**Backpressure** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
 
 ## Reference
 
