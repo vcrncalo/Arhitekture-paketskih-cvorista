@@ -7,18 +7,12 @@ Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvolj
 
 ### Specifikacija:
 
-- **Ulaz:** 8-bitni Avalon ST interfejs koji prima Ethernet pakete.
-- **Izlaz:** 8-bitni Avalon ST interfejs koji generiše niz ćelija fiksne dužine (64 bajta).
-- **Proces:**
-	 - Paket se dijeli na ćelije od 64 bajta.
-	- Broj ćelija, \(N\), definisan je kao \(N\) = {[Veličina paketa] / 64}
-	- Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa.
-	- Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta.
-- **Signalizacija:**
-	- Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet).
-	- Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži:
-		- Redni broj paketa.
-		- Redni broj ćelije unutar paketa.
+| Stavka | Opis |
+| -------- | ------ |
+| **Ulaz:** | 8-bitni Avalon ST interfejs koji prima Ethernet pakete. |
+| **Izlaz:** | 8-bitni Avalon ST interfejs koji generiše niz ćelija fiksne dužine (64 bajta). |
+| **Proces:** | Paket se dijeli na ćelije od 64 bajta.<br> Broj ćelija, \(N\), definisan je kao \(N\) = {[Veličina paketa] / 64} <br> Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa. <br> Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta. |
+| **Signalizacija:** | Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet). <br> Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži: <br> <ul><li>Redni broj paketa.</li><li>Redni broj ćelije unutar paketa.</li></ul> |
 
 ### Avalon ST interfejs
 
