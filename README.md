@@ -12,7 +12,7 @@ Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvolj
 | **Ulaz:** | 8-bitni Avalon ST interfejs koji prima Ethernet pakete. |
 | **Izlaz:** | 8-bitni Avalon ST interfejs koji generiše niz ćelija fiksne dužine (64 bajta). |
 | **Proces:** | Paket se dijeli na ćelije od 64 bajta.<br> Broj ćelija, \(N\), definisan je kao \(N\) = {[Veličina paketa] / 64} <br> Svaka ćelija prenosi dijelove paketa sa ulaznog interfejsa. <br> Posljednja ćelija se dopunjava nulama (zero padding) do dužine od 64 bajta. |
-| **Signalizacija:** | Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet). <br> Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži: <br> <ul><li>Redni broj paketa.</li><li>Redni broj ćelije unutar paketa.</li></ul> |
+| **Signalizacija:** | Početak i kraj ćelije označeni su signalima `sop` (start of packet) i `eop` (end of packet). <br> Paralelno sa podacima, izlazni interfejs prenosi `channel` signal koji sadrži: <ul><li>Redni broj paketa,</li><li>Redni broj ćelije unutar paketa.</li></ul> |
 
 ### Avalon ST interfejs
 
@@ -66,6 +66,10 @@ U oba grafika zero padding-a, neobojene ćelije predstavljaju zero padding.
 #### Backpressure
 
 **Backpressure** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
+
+<img src="WaveDrom/Backpressure/Backpressure_verzija.png" alt="Backpressure_verzija">
+
+<p align="center"><em>Wavedrom grafik - Backpressure</em></p>
 
 ## Reference
 
