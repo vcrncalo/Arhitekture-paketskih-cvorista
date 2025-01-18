@@ -28,11 +28,11 @@ Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih 
 
 ### Konverter paketa u ćelije
 
-*WaveDrom signali Avalon ST konvertera paketa u ćelije prikazan je na grafiku ispod:*
+*WaveDrom signali Avalon ST konvertera paketa u ćelije prikazani su na slici 1:*
 
 <img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.svg" alt="Packet_to_cell_conversion">
 
-<p align="center"><em>WaveDrom grafik - Konverter paketa u ćelije</em></p>
+<p align="center"><em>Slika 1: Konverter paketa u ćelije</em></p>
 
 Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi pojednostavljenja grafika se ne prikazuju svi podaci koji se prenose. Kod `source_channel` signala možemo vidjeti tri vrijednosti koje su različito obojene. Žuta boja predstavlja prvi kanal, plava predstavlja drugi kanal, a crvena predstavlja drugi dio drugog kanala.
 
@@ -61,13 +61,24 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
  **Zero padding** je tehnika koja se obično koristi u obradi digitalnih signala kako bi se standardizirale dimenzije, osigurale optimalne performanse i očuvale prvobitna struktura ulaznih podataka. Ova tehnika podrazumijeva dodavanje nula ulaznim podacima kako bi se osiguralo da podaci imaju specifičan oblik koji je pogodan za daljnju obradu. Iako ova tehnika dodatno opterećuje procesor, to je gotovo neznatno i prednosti kao što su očuvanje veličine podataka i povećana preciznost analize podataka čine ovu tehniku neophodnom. [^2]
 
-<img src="WaveDrom/Zero padding/Zero_padding_verzija.svg" alt="Zero_padding_verzija">
+*WaveDrom signali za zero padding 1B su prikazani na slici 2:*
 
-<p align="center"><em>WaveDrom grafik - Zero padding</em></p>
+<img src="WaveDrom/Zero padding/1B/Zero_padding_1B.svg" alt="Zero_padding_1B">
+
+<p align="center"><em>Slika 2: Zero padding 1B</em></p>
+
+*WaveDrom signali za zero padding 63B su prikazani na slici 3:*
+
+<img src="WaveDrom/Zero padding/63B/Zero_padding_63B.svg" alt="Zero_padding_63B">
+
+<p align="center"><em>Slika 3: Zero padding 63B</em></p>
+
 
 ### Backpressure
 
 **Backpressure** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
+
+WaveDrom signali za backpressure slučaj su prikazani na slici
 
 <img src="WaveDrom/Backpressure/Backpressure_verzija.svg" alt="Backpressure_verzija">
 
