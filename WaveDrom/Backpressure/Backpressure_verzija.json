@@ -47,7 +47,7 @@
     "text": "Clock cycles marked at rising edges"
   },
   "config": { 
-    "hscale": 1.,
+    "hscale": 1.5,
     "skin": "default"
   }
 }
