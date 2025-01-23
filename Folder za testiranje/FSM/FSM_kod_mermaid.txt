@@ -1,24 +1,31 @@
-graph LR
-    subgraph States
-        Idle((Idle))
-        PROCESSING((PROCESSING))
-        BACKPRESSURE((BACKPRESSURE))
-        ZERO_PADDING((ZERO_PADDING))
-    end
+stateDiagram-v2
+  direction LR
+  [*] --> Idle
 
-    %% State Transitions
-    Idle -- sink_sop = 1 & sink_valid = 1 --> PROCESSING
-    PROCESSING -- sink_ready = 0 (Backpressure) --> BACKPRESSURE
-    PROCESSING -- sink_eop = 1 & cell_incomplete = 1 --> ZERO_PADDING
-    PROCESSING -- sink_eop = 1 & cell_incomplete = 0 --> Idle
-    BACKPRESSURE -- sink_ready = 1 --> PROCESSING
-    BACKPRESSURE -- sink_eop = 1 & cell_incomplete = 1 --> ZERO_PADDING
-    ZERO_PADDING -- padding_complete = 1 --> Idle
+  state Idle {
+    [*] --> PROCESSING : sink_sop = 1 & sink_valid = 1
+    PROCESSING --> BACKPRESSURE : sink_ready = 0 (Backpressure)
+    PROCESSING --> ZERO_PADDING : sink_eop = 1 & cell_incomplete = 1
+    PROCESSING --> [*] : sink_eop = 1 & cell_incomplete = 0
+    BACKPRESSURE --> PROCESSING : sink_ready = 1
+    BACKPRESSURE --> ZERO_PADDING : sink_eop = 1 & cell_incomplete = 1
+    ZERO_PADDING --> [*] : padding_complete = 1
 
-    %% Styling
-    style Idle fill:#f9f,stroke:#333,stroke-width:2px
-    style PROCESSING fill:#f9f,stroke:#333,stroke-width:2px
-    style BACKPRESSURE fill:#f9f,stroke:#333,stroke-width:2px
-    style ZERO_PADDING fill:#f9f,stroke:#333,stroke-width:2px
-    
-    linkStyle 0,1,2,3,4,5,6 stroke:#333, stroke-width:2px;
+    Idle : state <= Idle
+    PROCESSING : state <= PROCESSING
+    BACKPRESSURE : state <= BACKPRESSURE
+    ZERO_PADDING : state <= ZERO_PADDING
+
+    Idle --> PROCESSING : source_valid = 1, source_data = sink_data
+    PROCESSING --> PROCESSING : byte_counter += 1, source_valid = 1
+    PROCESSING --> ZERO_PADDING : source_data = 0x00 (Zero Padding)
+    PROCESSING --> [*] : source_eoc = 1
+    BACKPRESSURE --> BACKPRESSURE : Hold State, source_valid = 0
+    BACKPRESSURE --> ZERO_PADDING : Fill cell with padding, source_data = 0x00
+    ZERO_PADDING --> [*] : source_eoc = 1, padding_complete
+  }
+
+  style Idle fill:#lightblue,stroke:#333,stroke-width:2px
+  style PROCESSING fill:#lightblue,stroke:#333,stroke-width:2px
+  style BACKPRESSURE fill:#lightblue,stroke:#333,stroke-width:2px
+  style ZERO_PADDING fill:#lightblue,stroke:#333,stroke-width:2px
