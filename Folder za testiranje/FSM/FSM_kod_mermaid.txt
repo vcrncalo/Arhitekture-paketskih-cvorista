@@ -5,6 +5,7 @@ graph TD
     classDef process1 fill:#f9f,stroke:blue,stroke-width:2px,stroke-dasharray: 5 5;
     classDef process2 fill:#f9f,stroke:green,stroke-width:2px,stroke-dasharray: 5 5;
     classDef process3 fill:#f9f,stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef register fill:#fff,stroke:#000,stroke-width:1px;
 
     %% Definicija stanja
     IDLE[IDLE]:::doublecircle;
@@ -30,19 +31,10 @@ graph TD
         ČEKAJ_READY -->|source_ready| POŠALJI_ĆELIJU
 
         %% Ažuriranja registra
-        PRIMI_PAKET:::register[next_state = PRIMI_PAKET
-        data_buffer <= sink_data
-        // next_state, data_buffer_next, padding_count se računaju]
-        POŠALJI_ĆELIJU:::register[next_state = POŠALJI_ĆELIJU
-        data_buffer_next <= data_buffer - cell_size
-        // next_state, data_buffer_next se računaju]
-        ČEKAJ_READY:::register[next_state = ČEKAJ_READY
-        // next_state se računa]
-        PADDING:::register[next_state = PADDING
-        padding_count <= padding_size
-        padding_next <= padding_next - 1
-        data_buffer_next <= 0
-        // next_state, padding_count, padding_next, data_buffer_next se računaju]
+        PRIMI_PAKET:::register
+        POŠALJI_ĆELIJU:::register
+        ČEKAJ_READY:::register
+        PADDING:::register
     end
 
     %% PROCES 2: Sekvencijalna logika za registre
