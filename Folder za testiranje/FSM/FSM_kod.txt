@@ -6,6 +6,7 @@ stateDiagram
     PROCESSING --> BACKPRESSURE: sink_ready = 0\nbyte_counter += 1, source_valid = 1
     PROCESSING --> ZERO_PADDING: sink_eop = 1 & cell_incomplete = 1\nsource_data = 0x00
     PROCESSING --> Idle: sink_eop = 1 & cell_incomplete = 0\nsource_eoc = 1
+    PROCESSING --> PROCESSING: continue processing\nbyte_counter += 1, source_valid = 1
     BACKPRESSURE --> PROCESSING: sink_ready = 1\nsource_valid = 0
     BACKPRESSURE --> ZERO_PADDING: sink_eop = 1 & cell_incomplete = 1\nsource_data = 0x00
     ZERO_PADDING --> Idle: padding_complete = 1\nsource_eoc = 1
