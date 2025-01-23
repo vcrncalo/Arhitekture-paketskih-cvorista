@@ -13,9 +13,8 @@ graph TD
     ČEKAJ_READY[ČEKAJ_READY];
     PADDING[PADDING];
 
-    subgraph cluster_process1
+    subgraph cluster_process1["PROCES 1: Kombinatorna logika (next state <= ftran(state, inputs))"]
         class cluster_process1 process1
-        label=PROCES 1: Kombinatorna logika (next state <= ftran(state, inputs))
 
         %% PROCES 1: Kombinatorna logika za tranzicije i ažuriranje registara
 
@@ -47,9 +46,8 @@ graph TD
     end
 
     %% PROCES 2: Sekvencijalna logika za registre
-    subgraph cluster_process2
+    subgraph cluster_process2["PROCES 2: Sekvencijalna logika (state <= next state)"]
         class cluster_process2 process2
-        label=PROCES 2: Sekvencijalna logika (state <= next state)
 
         registri[state <= next_state
         padding_count <= padding_next
@@ -59,9 +57,8 @@ graph TD
     end
 
     %% PROCES 3: Kombinatorna logika za izlaze
-    subgraph cluster_process3
+    subgraph cluster_process3["PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))"]
         class cluster_process3 process3
-        label=PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))
 
         izlazi[source_valid = (state == POŠALJI_ĆELIJU or state == PADDING)
         source_sop = (state == POŠALJI_ĆELIJU and data_buffer == initial_data_size)
