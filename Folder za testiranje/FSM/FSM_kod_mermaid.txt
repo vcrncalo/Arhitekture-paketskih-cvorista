@@ -1,36 +1,37 @@
 graph TD
+  
   direction LR
-
-  // Define states
+  
+  %% Define states
   Idle["Idle"]
   SENDING_CELL1["SENDING_CELL1"]
   SENDING_CELL2["SENDING_CELL2"]
   SENDING_CELL3["SENDING_CELL3"]
   ZERO_PADDING["ZERO_PADDING"]
-
-  // Define transitions (Process 1: Combinatorial logic for state transitions)
+  
+  %% Define transitions (Process 1: Combinatorial logic for state transitions)
   Idle -->|"sink_sop = 1 & sink_valid = 1"| SENDING_CELL1
   SENDING_CELL1 -->|"byte_counter == 64 & sink_ready = 1"| SENDING_CELL2
   SENDING_CELL2 -->|"byte_counter == 128 & sink_ready = 1"| SENDING_CELL3
   SENDING_CELL3 -->|"sink_eop = 1 & sink_valid = 0"| Idle
-
-  // Backpressure handling
+  
+  %% Backpressure handling
   SENDING_CELL1 -->|"sink_ready = 0 (Backpressure)"| SENDING_CELL1
   SENDING_CELL2 -->|"sink_ready = 0 (Backpressure)"| SENDING_CELL2
   SENDING_CELL3 -->|"sink_ready = 0 (Backpressure)"| SENDING_CELL3
-
-  // Zero padding logic
+  
+  %% Zero padding logic
   SENDING_CELL3 -->|"sink_eop = 1 & byte_counter < 128"| ZERO_PADDING
   ZERO_PADDING -->|"padding_complete = 1"| Idle
-
-  // Sequential logic (Process 2: Sequential state updates)
+  
+  %% Sequential logic (Process 2: Sequential state updates)
   %%Idle["state <= Idle"]
   %%SENDING_CELL1["state <= SENDING_CELL1"]
   %%SENDING_CELL2["state <= SENDING_CELL2"]
   %%SENDING_CELL3["state <= SENDING_CELL3"]
   %%ZERO_PADDING["state <= ZERO_PADDING"]
-
-  // Outputs (Process 3: Combinatorial logic for outputs)
+  
+  %% Outputs (Process 3: Combinatorial logic for outputs)
   %%Idle -->|"source_valid = 1, source_data = sink_data"| SENDING_CELL1
   %%SENDING_CELL1 -->|"sink_ready = 1"| SENDING_CELL2
   %%SENDING_CELL2 -->|"source_channel = sink_data[7:0]"| SENDING_CELL3
