@@ -41,13 +41,3 @@ graph TD
     %% Connections between processes
     clk_rst -->|dotted| IDLE
     clk_rst -->|dotted| state_update
-    clk_rst -->|dotted| padding_count_update
-    clk_rst -->|dotted| data_buffer_update
-    clk_rst -->|dotted| cell_size_assign
-    clk_rst -->|dotted| source_valid_assign
-    clk_rst -->|dotted| source_sop_assign
-    clk_rst -->|dotted| source_eop_assign
-    clk_rst -->|dotted| source_data_assign
-    clk_rst -->|dotted| sink_ready_assign
-    clk_rst -->|dotted| padding_done_assign
-    clk_rst -->|dotted| last_cell_assign
