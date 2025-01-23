@@ -1,6 +1,6 @@
+%%{init: {'theme': 'base', 'gitGraph': {'showCommitLabel': true}, 'flowchart': {'rankdir': 'LR'}} }%%
 graph TD
     %% Definicija izgleda grafa
-    rankdir=LR;
     classDef default fill:#f9f,stroke:#333,stroke-width:2px;
 
     %% Definicija stanja
