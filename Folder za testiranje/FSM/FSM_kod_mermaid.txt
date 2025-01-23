@@ -10,8 +10,8 @@ graph TD
     %% Definicija stanja
     IDLE[IDLE]:::doublecircle;
     PRIMI_PAKET[PRIMI_PAKET];
-    POŠALJI_ĆELIJU[POŠALJI_ĆELIJU];
-    ČEKAJ_READY[ČEKAJ_READY];
+    POSALJI_CELIJU[POSALJI_CELIJU];
+    CEKAJ_READY[CEKAJ_READY];
     PADDING[PADDING];
 
     subgraph cluster_process1["PROCES 1: Kombinatorna logika (next state <= ftran(state, inputs))"]
@@ -21,19 +21,19 @@ graph TD
 
         %% Tranzicije između stanja
         IDLE -->|sink_sop| PRIMI_PAKET
-        PRIMI_PAKET -->|sink_eop| POŠALJI_ĆELIJU
-        PRIMI_PAKET -->|!source_ready // backpressure| ČEKAJ_READY
-        POŠALJI_ĆELIJU -->|!last_cell & source_ready| PRIMI_PAKET
-        POŠALJI_ĆELIJU -->|!source_ready // backpressure| ČEKAJ_READY
-        POŠALJI_ĆELIJU -->|last_cell & source_ready| PADDING
+        PRIMI_PAKET -->|sink_eop| POSALJI_CELIJU
+        PRIMI_PAKET -->|!source_ready // backpressure| CEKAJ_READY
+        POSALJI_CELIJU -->|!last_cell & source_ready| PRIMI_PAKET
+        POSALJI_CELIJU -->|!source_ready // backpressure| CEKAJ_READY
+        POSALJI_CELIJU -->|last_cell & source_ready| PADDING
         PADDING -->|padding_done & source_ready| IDLE
-        PADDING -->|!source_ready // backpressure| ČEKAJ_READY
-        ČEKAJ_READY -->|source_ready| POŠALJI_ĆELIJU
+        PADDING -->|!source_ready // backpressure| CEKAJ_READY
+        CEKAJ_READY -->|source_ready| POSALJI_CELIJU
 
         %% Ažuriranja registra
         PRIMI_PAKET:::register
-        POŠALJI_ĆELIJU:::register
-        ČEKAJ_READY:::register
+        POSALJI_CELIJU:::register
+        CEKAJ_READY:::register
         PADDING:::register
     end
 
@@ -52,8 +52,8 @@ graph TD
     subgraph cluster_process3["PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))"]
         class cluster_process3 process3
 
-        izlazi[source_valid = (state == POŠALJI_ĆELIJU or state == PADDING)
-        source_sop = (state == POŠALJI_ĆELIJU and data_buffer == initial_data_size)
+        izlazi[source_valid = (state == POSALJI_CELIJU or state == PADDING)
+        source_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)
         source_eop = (state == PADDING)
         source_data = data_buffer[0:cell_size]
         sink_ready = (state == IDLE or state == PRIMI_PAKET)
