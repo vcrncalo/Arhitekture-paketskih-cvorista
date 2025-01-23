@@ -12,21 +12,17 @@ stateDiagram-v2
   ZERO_PADDING --> Idle : padding_complete = 1
 
   state Idle {
-    Idle : state <= Idle
     Idle --> PROCESSING : source_valid = 1, source_data = sink_data
   }
   state PROCESSING {
-    PROCESSING : state <= PROCESSING
     PROCESSING --> PROCESSING : byte_counter += 1, source_valid = 1
     PROCESSING --> ZERO_PADDING : source_data = 0x00 (Zero Padding)
     PROCESSING --> Idle : source_eoc = 1
   }
   state BACKPRESSURE {
-    BACKPRESSURE : state <= BACKPRESSURE
     BACKPRESSURE --> BACKPRESSURE : Hold State, source_valid = 0
     BACKPRESSURE --> ZERO_PADDING : Fill cell with padding, source_data = 0x00
   }
   state ZERO_PADDING {
-    ZERO_PADDING : state <= ZERO_PADDING
     ZERO_PADDING --> Idle : source_eoc = 1, padding_complete
   }
