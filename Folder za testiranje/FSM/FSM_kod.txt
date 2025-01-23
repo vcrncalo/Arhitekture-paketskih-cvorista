@@ -1,5 +1,6 @@
 ```mermaid
 stateDiagram
+    direction LR
     [*] --> Idle
     Idle --> PROCESSING: sink_sop = 1 & sink_valid = 1\nsource_valid = 1, source_data = sink_data
     PROCESSING --> BACKPRESSURE: sink_ready = 0\nbyte_counter += 1, source_valid = 1
