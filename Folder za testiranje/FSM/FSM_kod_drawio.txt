@@ -39,6 +39,7 @@ graph TD
     clk_rst["clk\nreset\nenable"]:::diamond
 
     %% Connections between processes
+    clk_rst -->|dotted| IDLE
     clk_rst -->|dotted| state_update
     clk_rst -->|dotted| padding_count_update
     clk_rst -->|dotted| data_buffer_update
@@ -50,6 +51,3 @@ graph TD
     clk_rst -->|dotted| sink_ready_assign
     clk_rst -->|dotted| padding_done_assign
     clk_rst -->|dotted| last_cell_assign
-
-    %% Assumptions
-    assumptions["Pretpostavke:\n- Podaci se primaju putem 'sink' interfejsa.\n- Podaci se šalju putem 'source' interfejsa.\n- 'cell_size' je konstanta.\n- 'initial_data_size' je početna veličina paketa podataka.\n- data_buffer mora biti dovoljno velik da primi cijeli paket podataka.\n- Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).\n- FSM se resetuje u IDLE stanje kada se reset aktivira.\n- Backpressure se kontroliše pomoću source_ready i sink_ready signala."]:::note
