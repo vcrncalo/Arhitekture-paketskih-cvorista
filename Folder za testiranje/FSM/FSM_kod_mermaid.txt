@@ -41,44 +41,22 @@ graph TD
     subgraph cluster_process2["PROCES 2: Sekvencijalna logika (state <= next state)"]
         class cluster_process2 process2
 
-        registri[state <= next_state
-        padding_count <= padding_next
-        data_buffer <= data_buffer_next
-        cell_size <= constant
-        // state, padding_count, data_buffer se ažuriraju]:::box
+        registri["state <= next_state\npadding_count <= padding_next\ndata_buffer <= data_buffer_next\ncell_size <= constant\n// state, padding_count, data_buffer se ažuriraju"]:::box
     end
 
     %% PROCES 3: Kombinatorna logika za izlaze
     subgraph cluster_process3["PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))"]
         class cluster_process3 process3
 
-        izlazi[source_valid = (state == POSALJI_CELIJU or state == PADDING)
-        source_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)
-        source_eop = (state == PADDING)
-        source_data = data_buffer[0:cell_size]
-        sink_ready = (state == IDLE or state == PRIMI_PAKET)
-        padding_done = (padding_count == 0)
-        // source_valid, source_sop, source_eop, source_data, sink_ready, padding_done se računaju]:::box
+        izlazi["source_valid = (state == POSALJI_CELIJU or state == PADDING)\nsource_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)\nsource_eop = (state == PADDING)\nsource_data = data_buffer[0:cell_size]\nsink_ready = (state == IDLE or state == PRIMI_PAKET)\npadding_done = (padding_count == 0)\n// source_valid, source_sop, source_eop, source_data, sink_ready, padding_done se računaju"]:::box
     end
 
     %% Clock, Reset, and Enable
-    clk_rst[clk
-    reset
-    enable]:::diamond
+    clk_rst["clk\nreset\nenable"]:::diamond
 
     %% Connections between processes
     clk_rst -->|dotted| registri
     registri -->|dotted| izlazi
 
     %% Assumptions
-    assumptions[Pretpostavke:
-    - Podaci se primaju putem 'sink' interfejsa.
-    - Podaci se šalju putem 'source' interfejsa.
-    - 'cell_size' je konstanta.
-    - 'initial_data_size' je početna veličina paketa podataka.
-    - data_buffer mora biti dovoljno velik da primi cijeli paket podataka.
-    - Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).
-    - FSM se resetuje u IDLE stanje kada se reset aktivira.
-    - Backpressure se kontroliše pomoću source_ready i sink_ready signala.
-    - 'last_cell' signal se generiše kada je preostala veličina podataka manja ili jednaka od 'cell_size'.
-    - padding_size = (cell_size - (initial_data_size % cell_size)) % cell_size]:::note
+    assumptions["Pretpostavke:\n- Podaci se primaju putem 'sink' interfejsa.\n- Podaci se šalju putem 'source' interfejsa.\n- 'cell_size' je konstanta.\n- 'initial_data_size' je početna veličina paketa podataka.\n- data_buffer mora biti dovoljno velik da primi cijeli paket podataka.\n- Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).\n- FSM se resetuje u IDLE stanje kada se reset aktivira.\n- Backpressure se kontroliše pomoću source_ready i sink_ready signala.\n- 'last_cell' signal se generiše kada je preostala veličina podataka manja ili jednaka od 'cell_size'.\n- padding_size = (cell_size - (initial_data_size % cell_size)) % cell_size"]:::note
