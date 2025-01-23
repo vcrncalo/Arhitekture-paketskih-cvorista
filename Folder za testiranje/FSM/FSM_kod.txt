@@ -1,40 +1,32 @@
-digraph FSM {
-  rankdir=LR;
-  size="12,6";
+stateDiagram-v2
+  direction LR
 
-  node [shape = circle, style=filled, fillcolor=lightblue];
+  [*] --> Idle
 
-  // Define states
-  Idle [label="Idle"];
-  PROCESSING [label="PROCESSING"];
-  BACKPRESSURE [label="BACKPRESSURE"];
-  ZERO_PADDING [label="ZERO_PADDING"];
+  Idle --> PROCESSING : sink_sop = 1 & sink_valid = 1
+  PROCESSING --> BACKPRESSURE : sink_ready = 0 (Backpressure)
+  PROCESSING --> ZERO_PADDING : sink_eop = 1 & cell_incomplete = 1
+  PROCESSING --> Idle : sink_eop = 1 & cell_incomplete = 0
+  BACKPRESSURE --> PROCESSING : sink_ready = 1
+  BACKPRESSURE --> ZERO_PADDING : sink_eop = 1 & cell_incomplete = 1
+  ZERO_PADDING --> Idle : padding_complete = 1
 
-  // State Transitions (Process 1: Combinatorial logic for state transitions)
-  Idle -> PROCESSING [label="sink_sop = 1 & sink_valid = 1"];
-  PROCESSING -> BACKPRESSURE [label="sink_ready = 0 (Backpressure)"];
-  PROCESSING -> ZERO_PADDING [label="sink_eop = 1 & cell_incomplete = 1"];
-  PROCESSING -> Idle [label="sink_eop = 1 & cell_incomplete = 0"];
-  BACKPRESSURE -> PROCESSING [label="sink_ready = 1"];
-  BACKPRESSURE -> ZERO_PADDING [label="sink_eop = 1 & cell_incomplete = 1"];
-  ZERO_PADDING -> Idle [label="padding_complete = 1"];
-
-  // Sequential Logic (Process 2: State Updates)
-  Idle [xlabel="state <= Idle"];
-  PROCESSING [xlabel="state <= PROCESSING"];
-  BACKPRESSURE [xlabel="state <= BACKPRESSURE"];
-  ZERO_PADDING [xlabel="state <= ZERO_PADDING"];
-
-  // Outputs (Process 3: Combinatorial logic for outputs)
-  Idle -> PROCESSING [headlabel="source_valid = 1, source_data = sink_data"];
-  PROCESSING -> PROCESSING [headlabel="byte_counter += 1, source_valid = 1"];
-  PROCESSING -> ZERO_PADDING [headlabel="source_data = 0x00 (Zero Padding)"];
-  PROCESSING -> Idle [headlabel="source_eoc = 1"];
-  BACKPRESSURE -> BACKPRESSURE [headlabel="Hold State, source_valid = 0"];
-  BACKPRESSURE -> ZERO_PADDING [headlabel="Fill cell with padding, source_data = 0x00"];
-  ZERO_PADDING -> Idle [headlabel="source_eoc = 1, padding_complete"];
-
-  // Styling
-  edge [fontname="Arial", fontsize=10];
-  node [fontname="Arial", fontsize=12];
-}
+  state Idle {
+    Idle : state <= Idle
+    Idle --> PROCESSING : source_valid = 1, source_data = sink_data
+  }
+  state PROCESSING {
+    PROCESSING : state <= PROCESSING
+    PROCESSING --> PROCESSING : byte_counter += 1, source_valid = 1
+    PROCESSING --> ZERO_PADDING : source_data = 0x00 (Zero Padding)
+    PROCESSING --> Idle : source_eoc = 1
+  }
+  state BACKPRESSURE {
+    BACKPRESSURE : state <= BACKPRESSURE
+    BACKPRESSURE --> BACKPRESSURE : Hold State, source_valid = 0
+    BACKPRESSURE --> ZERO_PADDING : Fill cell with padding, source_data = 0x00
+  }
+  state ZERO_PADDING {
+    ZERO_PADDING : state <= ZERO_PADDING
+    ZERO_PADDING --> Idle : source_eoc = 1, padding_complete
+  }
