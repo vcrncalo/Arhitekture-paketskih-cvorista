@@ -3,8 +3,6 @@ graph TD
     %% Definicija izgleda grafa
     classDef default fill:#f9f,stroke:#333,stroke-width:2px;
     classDef process1 fill:#f9f,stroke:blue,stroke-width:2px,stroke-dasharray: 5 5;
-    classDef process2 fill:#f9f,stroke:green,stroke-width:2px,stroke-dasharray: 5 5;
-    classDef process3 fill:#f9f,stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
     classDef register fill:#fff,stroke:#000,stroke-width:1px;
 
     %% Definicija stanja
@@ -35,31 +33,20 @@ graph TD
         POSALJI_CELIJU:::register
         CEKAJ_READY:::register
         PADDING:::register
+
+        %% Sekvencijalna logika za registre
+        registri("state <= next_state\npadding_count <= padding_next\ndata_buffer <= data_buffer_next\ncell_size <= constant\n// state, padding_count, data_buffer se ažuriraju"):::circle
+
+        %% Kombinatorna logika za izlaze
+        izlazi("source_valid = (state == POSALJI_CELIJU or state == PADDING)\nsource_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)\nsource_eop = (state == PADDING)\nsource_data = data_buffer[0:cell_size]\nsink_ready = (state == IDLE or state == PRIMI_PAKET)\npadding_done = (padding_count == 0)\n// source_valid, source_sop, source_eop, source_data, sink_ready, padding_done se računaju"):::circle
+
+        %% Clock, Reset, and Enable
+        clk_rst["clk\nreset\nenable"]:::diamond
+
+        %% Connections between processes
+        clk_rst -->|dotted| registri
+        registri -->|dotted| izlazi
     end
-
-    %% PROCES 2: Sekvencijalna logika za registre
-    subgraph cluster_process2["PROCES 2: Sekvencijalna logika (state <= next state)"]
-        class cluster_process2 process2
-
-    end
-
-    %% PROCES 3: Kombinatorna logika za izlaze
-    subgraph cluster_process3["PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))"]
-        class cluster_process3 process3
-
-    end
-
-    registri("state <= next_state\npadding_count <= padding_next\ndata_buffer <= data_buffer_next\ncell_size <= constant\n// state, padding_count, data_buffer se ažuriraju"):::circle
-    izlazi("source_valid = (state == POSALJI_CELIJU or state == PADDING)\nsource_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)\nsource_eop = (state == PADDING)\nsource_data = data_buffer[0:cell_size]\nsink_ready = (state == IDLE or state == PRIMI_PAKET)\npadding_done = (padding_count == 0)\n// source_valid, source_sop, source_eop, source_data, sink_ready, padding_done se računaju"):::circle
-
-    %% Clock, Reset, and Enable
-    clk_rst["clk\nreset\nenable"]:::diamond
-
-    %% Connections between processes
-    clk_rst -->|dotted| registri
-    registri -->|dotted| izlazi
-    izlazi -->|dotted| cluster_process3
-    registri -->|dotted| cluster_process2
 
     %% Assumptions
     assumptions["Pretpostavke:\n- Podaci se primaju putem 'sink' interfejsa.\n- Podaci se šalju putem 'source' interfejsa.\n- 'cell_size' je konstanta.\n- 'initial_data_size' je početna veličina paketa podataka.\n- data_buffer mora biti dovoljno velik da primi cijeli paket podataka.\n- Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).\n- FSM se resetuje u IDLE stanje kada se reset aktivira.\n- Backpressure se kontroliše pomoću source_ready i sink_ready signala.\n- 'last_cell' signal se generiše kada je preostala veličina podataka manja ili jednaka od 'cell_size'.\n- padding_size = (cell_size - (initial_data_size % cell_size)) % cell_size"]:::note
