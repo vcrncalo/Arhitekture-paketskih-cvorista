@@ -2,6 +2,9 @@
 graph TD
     %% Definicija izgleda grafa
     classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef process1 fill:#f9f,stroke:blue,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef process2 fill:#f9f,stroke:green,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef process3 fill:#f9f,stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
 
     %% Definicija stanja
     IDLE[IDLE]:::doublecircle;
@@ -11,8 +14,7 @@ graph TD
     PADDING[PADDING];
 
     subgraph cluster_process1
-        style=dotted;
-        color=blue;
+        class cluster_process1 process1
         label=PROCES 1: Kombinatorna logika (next state <= ftran(state, inputs))
 
         %% PROCES 1: Kombinatorna logika za tranzicije i ažuriranje registara
@@ -46,9 +48,8 @@ graph TD
 
     %% PROCES 2: Sekvencijalna logika za registre
     subgraph cluster_process2
+        class cluster_process2 process2
         label=PROCES 2: Sekvencijalna logika (state <= next state)
-        style=dotted;
-        color=green;
 
         registri[state <= next_state
         padding_count <= padding_next
@@ -59,9 +60,8 @@ graph TD
 
     %% PROCES 3: Kombinatorna logika za izlaze
     subgraph cluster_process3
+        class cluster_process3 process3
         label=PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))
-        style=dotted;
-        color=red;
 
         izlazi[source_valid = (state == POŠALJI_ĆELIJU or state == PADDING)
         source_sop = (state == POŠALJI_ĆELIJU and data_buffer == initial_data_size)
