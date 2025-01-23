@@ -11,7 +11,6 @@ stateDiagram-v2
     BACKPRESSURE --> ZERO_PADDING : sink_eop = 1 & cell_incomplete = 1
     ZERO_PADDING --> [*] : padding_complete = 1
 
-    Idle : state <= Idle
     PROCESSING : state <= PROCESSING
     BACKPRESSURE : state <= BACKPRESSURE
     ZERO_PADDING : state <= ZERO_PADDING
