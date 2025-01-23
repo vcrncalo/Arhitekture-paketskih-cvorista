@@ -1,43 +1,38 @@
-%%{init: {'theme': 'base', 'gitGraph': {'showCommitLabel': true}, 'flowchart': {'rankdir': 'TB'}} }%%
-graph TD
-    %% Definicija izgleda grafa
-    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef register fill:#fff,stroke:#000,stroke-width:1px;
+digraph FSM {
+  rankdir=LR;
+  size="10,5";
+  
+  node [shape = circle, style=filled, fillcolor=lightblue];
 
-    %% Definicija stanja
-    IDLE[IDLE]:::doublecircle;
-    PRIMI_PAKET[PRIMI_PAKET];
-    POSALJI_CELIJU[POSALJI_CELIJU];
-    CEKAJ_READY[CEKAJ_READY];
-    PADDING[PADDING];
+  // Define states
+  Idle [label="Idle"];
+  SENDING_CELL1 [label="SENDING_CELL1"];
+  SENDING_CELL2 [label="SENDING_CELL2"];
+  SENDING_CELL3 [label="SENDING_CELL3"];
 
-    %% Tranzicije između stanja
-    IDLE -->|sink_sop| PRIMI_PAKET
-    PRIMI_PAKET -->|sink_eop| POSALJI_CELIJU
-    PRIMI_PAKET -->|!source_ready| CEKAJ_READY
-    POSALJI_CELIJU -->|!last_cell & source_ready| PRIMI_PAKET
-    POSALJI_CELIJU -->|!source_ready| CEKAJ_READY
-    POSALJI_CELIJU -->|last_cell & source_ready| PADDING
-    PADDING -->|padding_done & source_ready| IDLE
-    PADDING -->|!source_ready| CEKAJ_READY
-    CEKAJ_READY -->|source_ready| POSALJI_CELIJU
+  // Define transitions (Process 1: Combinatorial logic for state transitions)
+  Idle -> SENDING_CELL1 [label="sink_sop = 1 & sink_valid = 1"];
+  SENDING_CELL1 -> SENDING_CELL2 [label="byte_counter == 64"];
+  SENDING_CELL2 -> SENDING_CELL3 [label="byte_counter == 128"];
+  SENDING_CELL3 -> Idle [label="sink_eop = 1 & sink_valid = 0"];
 
-    %% Sekvencijalna logika
-    state_update["state <= next_state"]:::circle
-    padding_count_update["padding_count <= padding_next"]:::circle
-    data_buffer_update["data_buffer <= data_buffer_next"]:::circle
-    cell_size_assign["cell_size <= constant"]:::circle
-    source_valid_assign["source_valid = (state == POSALJI_CELIJU or state == PADDING)"]:::circle
-    source_sop_assign["source_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)"]:::circle
-    source_eop_assign["source_eop = (state == PADDING)"]:::circle
-    source_data_assign["source_data = data_buffer[0:cell_size]"]:::circle
-    sink_ready_assign["sink_ready = (state == IDLE or state == PRIMI_PAKET)"]:::circle
-    padding_done_assign["padding_done = (padding_count == 0)"]:::circle
-    last_cell_assign["last_cell = (data_buffer <= cell_size)"]:::circle
+  // Add auxiliary states if necessary
+  SENDING_CELL3 -> SENDING_CELL2 [label="sink_ready = 0 (Backpressure)"];
+  SENDING_CELL2 -> SENDING_CELL1 [label="sink_ready = 0 (Backpressure)"];
 
-    %% Clock, Reset, and Enable
-    clk_rst["clk\nreset\nenable"]:::diamond
+  // Sequential logic (Process 2: Sequential state updates)
+  Idle [xlabel="state <= Idle"];
+  SENDING_CELL1 [xlabel="state <= SENDING_CELL1"];
+  SENDING_CELL2 [xlabel="state <= SENDING_CELL2"];
+  SENDING_CELL3 [xlabel="state <= SENDING_CELL3"];
 
-    %% Connections between processes
-    clk_rst -->|dotted| IDLE
-    clk_rst -->|dotted| state_update
+  // Outputs (Process 3: Combinatorial logic for outputs)
+  Idle -> SENDING_CELL1 [headlabel="source_valid = 1, source_data = sink_data"];
+  SENDING_CELL1 -> SENDING_CELL2 [headlabel="sink_ready = 1"];
+  SENDING_CELL2 -> SENDING_CELL3 [headlabel="source_channel = sink_data[7:0]"];
+  SENDING_CELL3 -> Idle [headlabel="source_eoc = 1"];
+  
+  // Graph Styling
+  edge [fontname="Arial", fontsize=10];
+  node [fontname="Arial", fontsize=12];
+}
