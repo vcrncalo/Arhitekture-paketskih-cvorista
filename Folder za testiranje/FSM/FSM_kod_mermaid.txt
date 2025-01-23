@@ -1,0 +1,95 @@
+graph TD
+    %% Definicija izgleda grafa
+    rankdir=LR;
+    classDef default fill:#f9f,stroke:#333,stroke-width:2px;
+
+    %% Definicija stanja
+    IDLE[IDLE]:::doublecircle;
+    PRIMI_PAKET[PRIMI_PAKET];
+    POŠALJI_ĆELIJU[POŠALJI_ĆELIJU];
+    ČEKAJ_READY[ČEKAJ_READY];
+    PADDING[PADDING];
+
+    subgraph cluster_process1
+        style=dotted;
+        color=blue;
+        label=PROCES 1: Kombinatorna logika (next state <= ftran(state, inputs))
+
+        %% PROCES 1: Kombinatorna logika za tranzicije i ažuriranje registara
+
+        %% Tranzicije između stanja
+        IDLE -->|sink_sop| PRIMI_PAKET
+        PRIMI_PAKET -->|sink_eop| POŠALJI_ĆELIJU
+        PRIMI_PAKET -->|!source_ready // backpressure| ČEKAJ_READY
+        POŠALJI_ĆELIJU -->|!last_cell & source_ready| PRIMI_PAKET
+        POŠALJI_ĆELIJU -->|!source_ready // backpressure| ČEKAJ_READY
+        POŠALJI_ĆELIJU -->|last_cell & source_ready| PADDING
+        PADDING -->|padding_done & source_ready| IDLE
+        PADDING -->|!source_ready // backpressure| ČEKAJ_READY
+        ČEKAJ_READY -->|source_ready| POŠALJI_ĆELIJU
+
+        %% Ažuriranja registra
+        PRIMI_PAKET:::register[next_state = PRIMI_PAKET
+        data_buffer <= sink_data
+        // next_state, data_buffer_next, padding_count se računaju]
+        POŠALJI_ĆELIJU:::register[next_state = POŠALJI_ĆELIJU
+        data_buffer_next <= data_buffer - cell_size
+        // next_state, data_buffer_next se računaju]
+        ČEKAJ_READY:::register[next_state = ČEKAJ_READY
+        // next_state se računa]
+        PADDING:::register[next_state = PADDING
+        padding_count <= padding_size
+        padding_next <= padding_next - 1
+        data_buffer_next <= 0
+        // next_state, padding_count, padding_next, data_buffer_next se računaju]
+    end
+
+    %% PROCES 2: Sekvencijalna logika za registre
+    subgraph cluster_process2
+        label=PROCES 2: Sekvencijalna logika (state <= next state)
+        style=dotted;
+        color=green;
+
+        registri[state <= next_state
+        padding_count <= padding_next
+        data_buffer <= data_buffer_next
+        cell_size <= constant
+        // state, padding_count, data_buffer se ažuriraju]:::box
+    end
+
+    %% PROCES 3: Kombinatorna logika za izlaze
+    subgraph cluster_process3
+        label=PROCES 3: Kombinatorna logika za izlaze (outputs <= fout(state))
+        style=dotted;
+        color=red;
+
+        izlazi[source_valid = (state == POŠALJI_ĆELIJU or state == PADDING)
+        source_sop = (state == POŠALJI_ĆELIJU and data_buffer == initial_data_size)
+        source_eop = (state == PADDING)
+        source_data = data_buffer[0:cell_size]
+        sink_ready = (state == IDLE or state == PRIMI_PAKET)
+        padding_done = (padding_count == 0)
+        // source_valid, source_sop, source_eop, source_data, sink_ready, padding_done se računaju]:::box
+    end
+
+    %% Clock, Reset, and Enable
+    clk_rst[clk
+    reset
+    enable]:::diamond
+
+    %% Connections between processes
+    clk_rst -->|dotted| registri
+    registri -->|dotted| izlazi
+
+    %% Assumptions
+    assumptions[Pretpostavke:
+    - Podaci se primaju putem 'sink' interfejsa.
+    - Podaci se šalju putem 'source' interfejsa.
+    - 'cell_size' je konstanta.
+    - 'initial_data_size' je početna veličina paketa podataka.
+    - data_buffer mora biti dovoljno velik da primi cijeli paket podataka.
+    - Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).
+    - FSM se resetuje u IDLE stanje kada se reset aktivira.
+    - Backpressure se kontroliše pomoću source_ready i sink_ready signala.
+    - 'last_cell' signal se generiše kada je preostala veličina podataka manja ili jednaka od 'cell_size'.
+    - padding_size = (cell_size - (initial_data_size % cell_size)) % cell_size]:::note
