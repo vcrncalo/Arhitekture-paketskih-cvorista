@@ -20,8 +20,6 @@ stateDiagram-v2
   }
   state ZERO_PADDING {
   }
-
-  BACKPRESSURE --> BACKPRESSURE : Hold State, source_valid = 0
   Idle --> PROCESSING : source_valid = 1, source_data = sink_data
   PROCESSING --> PROCESSING : byte_counter += 1, source_valid = 1
   PROCESSING --> ZERO_PADDING : source_data = 0x00 (Zero Padding)
