@@ -23,13 +23,33 @@ graph TD
     CEKAJ_READY -->|source_ready| POSALJI_CELIJU
 
     %% Sekvencijalna logika
-    registri("state <= next_state\npadding_count <= padding_next\ndata_buffer <= data_buffer_next\ncell_size <= constant\nsource_valid = (state == POSALJI_CELIJU or state == PADDING)\nsource_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)\nsource_eop = (state == PADDING)\nsource_data = data_buffer[0:cell_size]\nsink_ready = (state == IDLE or state == PRIMI_PAKET)\npadding_done = (padding_count == 0)\nlast_cell = (data_buffer <= cell_size)"):::circle
+    state_update["state <= next_state"]:::circle
+    padding_count_update["padding_count <= padding_next"]:::circle
+    data_buffer_update["data_buffer <= data_buffer_next"]:::circle
+    cell_size_assign["cell_size <= constant"]:::circle
+    source_valid_assign["source_valid = (state == POSALJI_CELIJU or state == PADDING)"]:::circle
+    source_sop_assign["source_sop = (state == POSALJI_CELIJU and data_buffer == initial_data_size)"]:::circle
+    source_eop_assign["source_eop = (state == PADDING)"]:::circle
+    source_data_assign["source_data = data_buffer[0:cell_size]"]:::circle
+    sink_ready_assign["sink_ready = (state == IDLE or state == PRIMI_PAKET)"]:::circle
+    padding_done_assign["padding_done = (padding_count == 0)"]:::circle
+    last_cell_assign["last_cell = (data_buffer <= cell_size)"]:::circle
 
     %% Clock, Reset, and Enable
     clk_rst["clk\nreset\nenable"]:::diamond
 
     %% Connections between processes
-    clk_rst -->|dotted| registri
+    clk_rst -->|dotted| state_update
+    clk_rst -->|dotted| padding_count_update
+    clk_rst -->|dotted| data_buffer_update
+    clk_rst -->|dotted| cell_size_assign
+    clk_rst -->|dotted| source_valid_assign
+    clk_rst -->|dotted| source_sop_assign
+    clk_rst -->|dotted| source_eop_assign
+    clk_rst -->|dotted| source_data_assign
+    clk_rst -->|dotted| sink_ready_assign
+    clk_rst -->|dotted| padding_done_assign
+    clk_rst -->|dotted| last_cell_assign
 
     %% Assumptions
     assumptions["Pretpostavke:\n- Podaci se primaju putem 'sink' interfejsa.\n- Podaci se šalju putem 'source' interfejsa.\n- 'cell_size' je konstanta.\n- 'initial_data_size' je početna veličina paketa podataka.\n- data_buffer mora biti dovoljno velik da primi cijeli paket podataka.\n- Padding se dodaje kako bi ukupna veličina podataka bila višekratnik od 'cell_size' (Zero Padding).\n- FSM se resetuje u IDLE stanje kada se reset aktivira.\n- Backpressure se kontroliše pomoću source_ready i sink_ready signala."]:::note
