@@ -6,6 +6,7 @@ graph TD
     classDef process2 fill:#f9f,stroke:green,stroke-width:2px,stroke-dasharray: 5 5;
     classDef process3 fill:#f9f,stroke:red,stroke-width:2px,stroke-dasharray: 5 5;
     classDef register fill:#fff,stroke:#000,stroke-width:1px;
+    classDef invisible style="display:none";
 
     %% Definicija stanja
     IDLE[IDLE]:::doublecircle;
@@ -64,12 +65,11 @@ graph TD
     %% Adding spacing to improve layout
     subgraph spacing
         direction TB
-        style=invis
-        A1[" "]
-        B1[" "]
-        C1[" "]
-        D1[" "]
-        E1[" "]
+        A1:::invisible
+        B1:::invisible
+        C1:::invisible
+        D1:::invisible
+        E1:::invisible
         A1 --> B1
         B1 --> C1
         C1 --> D1
