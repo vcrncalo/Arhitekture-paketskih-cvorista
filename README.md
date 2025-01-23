@@ -78,14 +78,25 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 **Backpressure** je mehanizam u kojem dolazi do signaliziranja od strane izlaznog interfejsa prema ulaznom interfejsu i signalizira se da je potrebno privremeno zaustavljanje slanja podataka jer izlazni interfejs nije spreman za obradu podataka. U Avalon ST Splitter jezgri, backpressure-om se upravlja na način da ako izlazni signal promijeni vrijednost `ready` signala sa 1 na 0, tada ulazni signal prima taj signal promijenjene vrijednosti i podaci se prestaju slati, čime se osigurava sinhronizacija toka podataka. [^3] 
 
-WaveDrom signali za backpressure slučaj su prikazani na slici
+*WaveDrom signali za backpressure slučaj su prikazani na slici 4:*
 
 <img src="WaveDrom/Backpressure/Backpressure_verzija.svg" alt="Backpressure_verzija">
 
-<p align="center"><em>Wavedrom grafik - Backpressure</em></p>
+<p align="center"><em>Slika 4: Wavedrom grafik - Backpressure</em></p>
+
+## FSM - Finite State Machine
+
+Blok "Finite State Machine" state machine u DSP Builder dizajn. Finite State Machine se može opisati koristeći FSM specifikacijski jezik, koji se unosi u tekstualnu datoteku. Zatim, ta tekstualna datoteka se učita koristeći Finite State Machine blok i povezuju se ulazni i izlazni portovi bloka FSM-a s ostatkom dizajna. DSP Builder zatim generiše odgovarajuće loop (ForLoop) i lookup-table (LUT) strukture za implementaciju state-machine-a opisanog u tekstualnoj datoteci. Međutim, ti ForLoop i LUT blokovi nisu vidljivi u DSP Builder dizajnu. DSP Builder prevodi ForLoop i LUT blokove u RTL s automatskim mapiranjem uređaja i balansiranjem latencije s ostatkom DSP Builder dizajna. DSP Builder pruža primjer dizajna konačnog automata, demo_fsm.mdl, koji pokazuje kako koristiti blok Finite State Machine za filtriranje specifičnih numeričkih iz ulaznog toka. [^4]    
+
+*FSM Avalon-ST Konvertera paketa u ćelije je prikazan na slici 5:*
+
+<img src="FSM/FSM.svg" alt="FSM">
+
+<p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
 
 ## Reference
 
-[^1]:  Intel Corporation. [Intel Avalon-ST Interface](https://www.intel.com/content/www/us/en/docs/programmable/683647/18-0/avalon-st-interface.html)
+[^1]: Intel Corporation. [Intel Avalon-ST Interface](https://www.intel.com/content/www/us/en/docs/programmable/683647/18-0/avalon-st-interface.html)
 [^2]: GeeksForGeeks Sanchhaya Education Private Limited, (17 Sep, 2024). [GeeksForGeeks - Zero Padding in Deep Learing and Signal Processing](https://www.geeksforgeeks.org/zero-padding-in-deep-learning-and-signal-processing/)
-[^3]:  Intel Corporation. [intel.com backpressure](https://www.intel.com/content/www/us/en/docs/programmable/683130/22-2/backpressure.html)
+[^3]: Intel Corporation. [Embedded Peripherals IP User Guide](https://www.intel.com/content/www/us/en/docs/programmable/683130/22-2/backpressure.html)
+[^4]: Intel Corporation. [DSP Builder for Intel® FPGAs](https://www.intel.com/content/www/us/en/docs/programmable/683337/22-2/finite-state-machine.html)
