@@ -80,7 +80,7 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 *WaveDrom signali za backpressure slučaj su prikazani na slici 4:*
 
-<img src="WaveDrom/Backpressure/Backpressure_verzija.svg" alt="Backpressure_verzija">
+<img src="WaveDrom/Backpressure/Backpressure.svg" alt="Backpressure">
 
 <p align="center"><em>Slika 4: Wavedrom grafik - Backpressure</em></p>
 
