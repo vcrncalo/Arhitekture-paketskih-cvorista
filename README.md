@@ -94,6 +94,12 @@ Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite 
 
 <p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
 
+## VHDL
+
+VHDL je softverski alat za dizajn i verifikaciju digitalnih sistema koji inženjerima pruža fleksibilnost, skalabilnost i standardizaciju. Njegova deskriptivna priroda i sintaksa čine ga pristupačnim i efikasnim za upotrebu u različitim aplikacijama od dizajna IC do prototipiranja i verifikacije. 
+
+Za ovaj projektni zadatak se koristi glavni VHDL kod i tri testbench VHDL koda, jedan za konverter paketa u ćelije, drugi za backpressure slučaj i treći za zero padding slučaj.
+
 ## Reference
 
 [^1]: Intel Corporation. [Intel Avalon-ST Interface](https://www.intel.com/content/www/us/en/docs/programmable/683647/18-0/avalon-st-interface.html)
