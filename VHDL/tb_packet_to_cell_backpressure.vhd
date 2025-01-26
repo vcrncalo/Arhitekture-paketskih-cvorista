@@ -45,11 +45,11 @@ architecture behavior of tb_packet_to_cell_backpressure is
   signal source_channel : std_logic_vector(31 downto 0);
   signal source_valid : std_logic;
   signal source_ready : std_logic := '1';
-  signal byte_counter : std_logic_vector(7 downto 0);
+  signal byte_counter : std_logic_vector(7 downto 0) := (others => '0');
   signal state_out : std_logic_vector(2 downto 0);
-  signal bit_counter : std_logic_vector(11 downto 0);
-  signal cell_incomplete : std_logic;
-  signal padding_complete : std_logic;
+  signal bit_counter : std_logic_vector(11 downto 0) := (others => '0');
+  signal cell_incomplete : std_logic := '0';
+  signal padding_complete : std_logic := '0';
 
   -- Clock period definition
   constant CLK_PERIOD : time := 10 ns;

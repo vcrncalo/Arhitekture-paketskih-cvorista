@@ -35,10 +35,10 @@ architecture rtl of packet_to_cell is
   constant CELL_SIZE : integer := 64;
 
   -- Internal signals
-  signal byte_counter_int : unsigned(7 downto 0);  -- Counts up to CELL_SIZE
-  signal bit_counter_int : unsigned(11 downto 0);  -- Counts up to 1024
-  signal packet_counter : unsigned(15 downto 0);
-  signal cell_counter  : unsigned(15 downto 0);
+  signal byte_counter_int : unsigned(7 downto 0) := (others => '0');  -- Counts up to CELL_SIZE
+  signal bit_counter_int : unsigned(11 downto 0) := (others => '0');  -- Counts up to 1024
+  signal packet_counter : unsigned(15 downto 0) := (others => '0');
+  signal cell_counter  : unsigned(15 downto 0) := (others => '0');
   signal cell_incomplete_int : std_logic := '0';
   signal padding_complete_int : std_logic := '0';
 
@@ -142,6 +142,7 @@ begin
 
       if state = IDLE then
         padding_complete_int <= '0';
+        cell_incomplete_int <= '0';
       end if;
 
       -- Update channel signal
