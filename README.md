@@ -30,7 +30,7 @@ Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih 
 
 *WaveDrom signali Avalon ST konvertera paketa u ćelije prikazani su na slici 1:*
 
-<img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.svg" alt="Packet_to_cell_conversion">
+<img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.png" alt="Packet_to_cell_conversion">
 
 <p align="center"><em>Slika 1: Konverter paketa u ćelije</em></p>
 
@@ -63,13 +63,13 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 *WaveDrom signali za zero padding 1B su prikazani na slici 2:*
 
-<img src="WaveDrom/Zero padding/1B/Zero_padding_1B.svg" alt="Zero_padding_1B">
+<img src="WaveDrom/Zero padding/1B/Zero_padding_1B.png" alt="Zero_padding_1B">
 
 <p align="center"><em>Slika 2: Zero padding 1B</em></p>
 
 *WaveDrom signali za zero padding 63B su prikazani na slici 3:*
 
-<img src="WaveDrom/Zero padding/63B/Zero_padding_63B.svg" alt="Zero_padding_63B">
+<img src="WaveDrom/Zero padding/63B/Zero_padding_63B.png" alt="Zero_padding_63B">
 
 <p align="center"><em>Slika 3: Zero padding 63B</em></p>
 
@@ -80,7 +80,7 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 *WaveDrom signali za backpressure slučaj su prikazani na slici 4:*
 
-<img src="WaveDrom/Backpressure/Backpressure.svg" alt="Backpressure">
+<img src="WaveDrom/Backpressure/Backpressure.png" alt="Backpressure">
 
 <p align="center"><em>Slika 4: Wavedrom grafik - Backpressure</em></p>
 
@@ -90,7 +90,7 @@ Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite 
 
 *FSM Avalon-ST Konvertera paketa u ćelije je prikazan na slici 5:*
 
-<img src="FSM/FSM.svg" alt="FSM">
+<img src="FSM/FSM.png" alt="FSM">
 
 <p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
 
