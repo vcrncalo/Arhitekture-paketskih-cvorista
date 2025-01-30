@@ -1,0 +1,325 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "sink_ready",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[0]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[1]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[2]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[3]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[4]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[5]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[6]",
+					"strict" : false
+				},
+				{
+					"name" : "source_cell[7]",
+					"strict" : false
+				},
+				{
+					"name" : "source_soc",
+					"strict" : false
+				},
+				{
+					"name" : "source_eoc",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[0]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[1]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[2]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[3]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[4]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[5]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[6]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[7]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[8]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[9]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[10]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[11]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[12]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[13]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[14]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[15]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[16]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[17]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[18]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[19]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[20]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[21]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[22]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[23]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[24]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[25]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[26]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[27]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[28]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[29]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[30]",
+					"strict" : false
+				},
+				{
+					"name" : "source_channel[31]",
+					"strict" : false
+				},
+				{
+					"name" : "source_valid",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[0]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[1]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[2]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[3]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[4]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[5]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[6]",
+					"strict" : false
+				},
+				{
+					"name" : "byte_counter[7]",
+					"strict" : false
+				},
+				{
+					"name" : "state_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "state_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[3]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[4]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[5]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[6]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[7]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[8]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[9]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[10]",
+					"strict" : false
+				},
+				{
+					"name" : "bit_counter[11]",
+					"strict" : false
+				},
+				{
+					"name" : "cell_incomplete",
+					"strict" : false
+				},
+				{
+					"name" : "padding_complete",
+					"strict" : false
+				},
+				{
+					"name" : "source_ready",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_data[7]",
+					"strict" : false
+				},
+				{
+					"name" : "sink_eop",
+					"strict" : false
+				},
+				{
+					"name" : "sink_valid",
+					"strict" : false
+				},
+				{
+					"name" : "sink_sop",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
