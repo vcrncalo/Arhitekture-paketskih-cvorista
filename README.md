@@ -30,9 +30,10 @@ Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih 
 
 *WaveDrom signali Avalon ST konvertera paketa u ćelije prikazani su na slici 1:*
 
-<img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.png" alt="Packet_to_cell_conversion">
-
-<p align="center"><em>Slika 1: Konverter paketa u ćelije</em></p>
+<p align="center">
+<img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.png" alt="Packet_to_cell_conversion"></img>
+<em>Slika 1: Konverter paketa u ćelije</em>
+</p>
 
 Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi pojednostavljenja grafika se ne prikazuju svi podaci koji se prenose. Kod `source_channel` signala možemo vidjeti tri vrijednosti koje su različito obojene. Žuta boja predstavlja prvi kanal, plava predstavlja drugi kanal, a crvena predstavlja drugi dio drugog kanala.
 
@@ -63,16 +64,17 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 *WaveDrom signali za zero padding 1B su prikazani na slici 2:*
 
-<img src="WaveDrom/Zero padding/1B/Zero_padding_1B.png" alt="Zero_padding_1B">
-
-<p align="center"><em>Slika 2: Zero padding 1B</em></p>
+<p align="center">
+<img src="WaveDrom/Zero padding/1B/Zero_padding_1B.png" alt="Zero_padding_1B"></img>
+<em>Slika 2: Zero padding 1B</em>
+</p>
 
 *WaveDrom signali za zero padding 63B su prikazani na slici 3:*
 
-<img src="WaveDrom/Zero padding/63B/Zero_padding_63B.png" alt="Zero_padding_63B">
-
-<p align="center"><em>Slika 3: Zero padding 63B</em></p>
-
+<p align="center">
+<img src="WaveDrom/Zero padding/63B/Zero_padding_63B.png" alt="Zero_padding_63B"></img>
+<em>Slika 3: Zero padding 63B</em>
+</p>
 
 ### Backpressure
 
@@ -80,9 +82,10 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 *WaveDrom signali za backpressure slučaj su prikazani na slici 4:*
 
-<img src="WaveDrom/Backpressure/Backpressure.png" alt="Backpressure">
-
-<p align="center"><em>Slika 4: Wavedrom grafik - Backpressure</em></p>
+<p align="center">
+<img src="WaveDrom/Backpressure/Backpressure.png" alt="Backpressure"></img>
+<em>Slika 4: Wavedrom grafik - Backpressure</em>
+</p>
 
 ## FSM - Finite State Machine
 
@@ -92,15 +95,17 @@ Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer*
 
 *FSM state viewer je prikazan na slici 5:*
 
-<img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"> </img>
-
-<p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
+<p align="center">
+<img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"></img>
+<em>Slika 5: FSM - Finite State Machine</em>
+</p>
 
 *FSM Avalon-ST Konvertera paketa u ćelije je prikazan na slici 6:*
 
-<img src="FSM/FSM.png" alt="FSM">
-
-<p align="center"><em>Slika 6: FSM - Finite State Machine</em></p>
+<p align="center">
+<img src="FSM/FSM.png" alt="FSM"></img>
+<em>Slika 6: FSM - Finite State Machine</em>
+</p>
 
 ## VHDL
 
@@ -122,27 +127,31 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 #### Packet-to-cell converter
 
-<img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell">
-
-<p align="center"><em>Slika 7: ModelSim - Packet-to-cell converter</em></p>
+<p align="center">
+<img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell"></img>
+<em>Slika 7: ModelSim - Packet-to-cell converter</em>
+</p>
 
 #### Backpressure
 
-<img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure">
-
-<p align="center"><em>Slika 8: ModelSim - Backpressure</p>
+<p align="center">
+<img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure"></img>
+<em>Slika 8: ModelSim - Backpressure</em>
+</p>
 
 #### Zero padding
 
-<img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding">
-
-<p align="center"><em>Slika 9: ModelSim - Zero padding</em></p>
+<p align="center">
+<img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding"></img> 
+<em>Slika 9: ModelSim - Zero padding</em>
+</p>
 
 ### Compilation report
 
-<img src="VHDL/Slike/compilation_report.png" alt="compilation_report"> </img>
-
-<p align="center"><em>Slika 10: Compilation report</em></p> 
+<p align="center">
+<img src="VHDL/Slike/compilation_report.png" alt="compilation_report"></img>
+<em>Slika 10: Compilation report</em>
+</p> 
 
 ## Reference
 
