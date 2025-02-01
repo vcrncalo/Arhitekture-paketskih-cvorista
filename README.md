@@ -88,11 +88,19 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite State Machine se može opisati koristeći FSM specifikacijski jezik, koji se unosi u tekstualnu datoteku. Zatim, ta tekstualna datoteka se učita koristeći Finite State Machine blok i povezuju se ulazni i izlazni portovi bloka FSM-a s ostatkom dizajna. DSP Builder zatim generiše odgovarajuće loop (ForLoop) i lookup-table (LUT) strukture za implementaciju state-machine-a opisanog u tekstualnoj datoteci. Međutim, ti ForLoop i LUT blokovi nisu vidljivi u DSP Builder dizajnu. DSP Builder prevodi ForLoop i LUT blokove u RTL s automatskim mapiranjem uređaja i balansiranjem latencije s ostatkom DSP Builder dizajna. DSP Builder pruža primjer dizajna konačnog automata, demo_fsm.mdl, koji pokazuje kako koristiti blok Finite State Machine za filtriranje specifičnih numeričkih vrijednosti iz ulaznog toka. [^4]    
 
-*FSM Avalon-ST Konvertera paketa u ćelije je prikazan na slici 5:*
+Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer** u **Quartus Prime Lite** softveru kojem se može pristuputi klikom na **Tools**->**Netlist viewers**->**FSM state viewer**.
+
+*FSM state viewer je prikazan na slici 5:*
+
+<img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"> <
+
+<p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
+
+*FSM Avalon-ST Konvertera paketa u ćelije je prikazan na slici 6:*
 
 <img src="FSM/FSM.png" alt="FSM">
 
-<p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
+<p align="center"><em>Slika 6: FSM - Finite State Machine</em></p>
 
 ## VHDL
 
@@ -116,19 +124,25 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 <img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell">
 
-<p align="center"><em>Slika 6: ModelSim - Packet-to-cell converter</em></p>
+<p align="center"><em>Slika 7: ModelSim - Packet-to-cell converter</em></p>
 
 #### Backpressure
 
 <img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure">
 
-<p align="center"><em>Slika 7: ModelSim - Backpressure</p>
+<p align="center"><em>Slika 8: ModelSim - Backpressure</p>
 
 #### Zero padding
 
 <img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding">
 
-<p align="center"><em>Slika 8: ModelSim - Zero padding</em></p>
+<p align="center"><em>Slika 9: ModelSim - Zero padding</em></p>
+
+### Compilation report
+
+<img src="VHDL/Slike/compilation_report.png" alt="compilation_report"> </img>
+
+<p align="center"><em>Slika 10: Compilation report</em></p> 
 
 ## Reference
 
