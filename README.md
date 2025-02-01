@@ -92,7 +92,7 @@ Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer*
 
 *FSM state viewer je prikazan na slici 5:*
 
-<img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"> <
+<img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"> </img>
 
 <p align="center"><em>Slika 5: FSM - Finite State Machine</em></p>
 
