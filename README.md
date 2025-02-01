@@ -32,6 +32,7 @@ Tipični sistem koji koristi Avalon ST interfejse kombinira više funkcionalnih 
 
 <p align="center">
 <img src="WaveDrom/Packet to cell conversion/Packet_to_cell_conversion.png" alt="Packet_to_cell_conversion"></img>
+<br>
 <em>Slika 1: Konverter paketa u ćelije</em>
 </p>
 
@@ -67,6 +68,7 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 <p align="center">
 <img src="WaveDrom/Zero padding/1B/Zero_padding_1B.png" alt="Zero_padding_1B"></img>
 <em>Slika 2: Zero padding 1B</em>
+<br>
 </p>
 
 *WaveDrom signali za zero padding 63B su prikazani na slici 3:*
@@ -74,6 +76,7 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 <p align="center">
 <img src="WaveDrom/Zero padding/63B/Zero_padding_63B.png" alt="Zero_padding_63B"></img>
 <em>Slika 3: Zero padding 63B</em>
+<br>
 </p>
 
 ### Backpressure
@@ -85,18 +88,22 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 <p align="center">
 <img src="WaveDrom/Backpressure/Backpressure.png" alt="Backpressure"></img>
 <em>Slika 4: Wavedrom grafik - Backpressure</em>
+<br>
 </p>
+
+---
 
 ## FSM - Finite State Machine
 
 Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite State Machine se može opisati koristeći FSM specifikacijski jezik, koji se unosi u tekstualnu datoteku. Zatim, ta tekstualna datoteka se učita koristeći Finite State Machine blok i povezuju se ulazni i izlazni portovi bloka FSM-a s ostatkom dizajna. DSP Builder zatim generiše odgovarajuće loop (ForLoop) i lookup-table (LUT) strukture za implementaciju state-machine-a opisanog u tekstualnoj datoteci. Međutim, ti ForLoop i LUT blokovi nisu vidljivi u DSP Builder dizajnu. DSP Builder prevodi ForLoop i LUT blokove u RTL s automatskim mapiranjem uređaja i balansiranjem latencije s ostatkom DSP Builder dizajna. DSP Builder pruža primjer dizajna konačnog automata, demo_fsm.mdl, koji pokazuje kako koristiti blok Finite State Machine za filtriranje specifičnih numeričkih vrijednosti iz ulaznog toka. [^4]    
 
-Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer** u **Quartus Prime Lite** softveru kojem se može pristuputi klikom na **Tools**->**Netlist viewers**->**FSM state viewer**.
+Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer** u **Quartus Prime Lite** softveru kojem se može pristuputi klikom na **Tools** -> **Netlist viewers** -> **FSM state viewer**.
 
 *FSM state viewer je prikazan na slici 5:*
 
 <p align="center">
 <img src="VHDL/Slike/FSM_state_viewer.png" alt="FSM_state_viewer"></img>
+<br>
 <em>Slika 5: FSM - Finite State Machine</em>
 </p>
 
@@ -105,7 +112,10 @@ Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer*
 <p align="center">
 <img src="FSM/FSM.png" alt="FSM"></img>
 <em>Slika 6: FSM - Finite State Machine</em>
+<br>
 </p>
+
+---
 
 ## VHDL
 
@@ -130,6 +140,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell"></img>
 <em>Slika 7: ModelSim - Packet-to-cell converter</em>
+<br>
 </p>
 
 #### Backpressure
@@ -137,6 +148,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure"></img>
 <em>Slika 8: ModelSim - Backpressure</em>
+<br>
 </p>
 
 #### Zero padding
@@ -144,14 +156,18 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding"></img> 
 <em>Slika 9: ModelSim - Zero padding</em>
+<br>
 </p>
 
 ### Compilation report
 
 <p align="center">
 <img src="VHDL/Slike/compilation_report.png" alt="compilation_report"></img>
+<br>
 <em>Slika 10: Compilation report</em>
 </p> 
+
+---
 
 ## Reference
 
