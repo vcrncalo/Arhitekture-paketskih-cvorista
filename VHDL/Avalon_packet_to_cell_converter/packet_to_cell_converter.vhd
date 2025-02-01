@@ -32,10 +32,10 @@ architecture rtl of packet_to_cell is
   signal state, next_state : state_type;
 
   -- Constants
-  constant CELL_SIZE : integer := 64;
+  constant cell_size : integer := 64;
 
   -- Internal signals
-  signal byte_counter_int : unsigned(7 downto 0) := (others => '0');  -- Counts up to CELL_SIZE
+  signal byte_counter_int : unsigned(7 downto 0) := (others => '0');  -- Counts up to cell_size
   signal bit_counter_int : unsigned(11 downto 0) := (others => '0');  -- Counts up to 1024
   signal packet_counter : unsigned(15 downto 0) := (others => '0');
   signal cell_counter  : unsigned(15 downto 0) := (others => '0');
@@ -88,7 +88,7 @@ begin
               source_soc <= '0';
             end if;
 
-            if byte_counter_int = CELL_SIZE - 1 then
+            if byte_counter_int = cell_size - 1 then
               source_eoc <= '1';
               cell_incomplete_int <= '0';
             else
@@ -125,7 +125,7 @@ begin
             byte_counter_int <= byte_counter_int + 1;
             bit_counter_int <= bit_counter_int + 8;
 
-            if byte_counter_int = CELL_SIZE - 1 then
+            if byte_counter_int = cell_size - 1 then
               source_eoc <= '1';
               padding_complete_int <= '1';
               byte_counter_int <= (others => '0');

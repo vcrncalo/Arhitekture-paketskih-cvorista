@@ -52,8 +52,8 @@ architecture behavior of tb_packet_to_cell_zero_padding is
   signal padding_complete : std_logic := '0';
 
   -- Clock period definition
-  constant CLK_PERIOD : time := 10 ns;
-  constant CELL_SIZE : integer := 64;
+  constant clk_period : time := 10 ns;
+  constant cell_size : integer := 64;
 
 begin
   -- Instantiate the Unit Under Test (UUT)
@@ -82,18 +82,18 @@ begin
   clk_process: process
   begin
     clk <= '0';
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     clk <= '1';
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
   end process;
 
   -- Stimulus process
   stim_proc: process
   begin
     -- Reset
-    wait for CLK_PERIOD*2;
+    wait for clk_period*2;
     reset <= '0';
-    wait for CLK_PERIOD*2;
+    wait for clk_period*2;
 
     -- Test Case 1: Send 65-byte packet to trigger zero padding
     sink_valid <= '1';
@@ -105,44 +105,44 @@ begin
       if i = 63 then
         sink_eop <= '1';
       end if;
-      wait for CLK_PERIOD;
+      wait for clk_period;
     end loop;
 
     -- Send remaining 1 byte
     sink_data <= std_logic_vector(to_unsigned(64, 8));
     sink_eop <= '1';
-    wait for CLK_PERIOD;
+    wait for clk_period;
 
     sink_valid <= '0';
     sink_sop <= '0';
     sink_eop <= '0';
 
-    wait for CLK_PERIOD*2;
+    wait for clk_period*2;
 
     -- Check cell_incomplete after sending 65 bytes
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     assert cell_incomplete = '1' report "Error: cell_incomplete should be '1' after sending 65 bytes" severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
 
     -- Wait for padding to complete
-    for i in 0 to (CELL_SIZE - (65 mod CELL_SIZE)) - 1 loop
-        wait for CLK_PERIOD/2;
+    for i in 0 to (cell_size - (65 mod cell_size)) - 1 loop
+        wait for clk_period/2;
     end loop;
 
     -- Check cell_incomplete after padding
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     assert cell_incomplete = '0' report "Error: cell_incomplete should be '0' after padding" severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
 
     -- Check source_valid after padding
     assert source_valid = '1' report "Error: source_valid should be '1' after padding" severity error;
     assert source_soc = '1' report "Error: source_soc should be '1' at the start of the padding" severity error;
-    wait for CLK_PERIOD;
+    wait for clk_period;
     assert source_valid = '0' report "Error: source_valid should be '0' after padding" severity error;
 
     -- Check source_eoc after padding
     assert source_eoc = '1' report "Error: source_eoc should be '1' after padding" severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     assert source_eoc = '0' report "Error: source_eoc should be '0' after padding" severity error;
 
     -- Check padding_complete after padding

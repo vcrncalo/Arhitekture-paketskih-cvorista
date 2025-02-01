@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Packet_to_cell_converter
-Sun Jan 26 22:31:07 2025
-Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Sat Feb  1 13:13:58 2025
+Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
 ---------------------
@@ -27,7 +27,7 @@ Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 2019  Intel Corporation. All rights reserved.
+Copyright (C) 2023  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
@@ -44,24 +44,24 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+----------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                     ;
-+------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Jan 26 22:31:07 2025       ;
-; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
-; Revision Name                      ; Packet_to_cell_converter                    ;
-; Top-level Entity Name              ; packet_to_cell                              ;
-; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 140                                         ;
-;     Total combinational functions  ; 104                                         ;
-;     Dedicated logic registers      ; 102                                         ;
-; Total registers                    ; 102                                         ;
-; Total pins                         ; 83                                          ;
-; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 0                                           ;
-; Embedded Multiplier 9-bit elements ; 0                                           ;
-; Total PLLs                         ; 0                                           ;
-+------------------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Feb  1 13:13:58 2025          ;
+; Quartus Prime Version              ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name                      ; Packet_to_cell_converter                       ;
+; Top-level Entity Name              ; packet_to_cell                                 ;
+; Family                             ; Cyclone IV E                                   ;
+; Total logic elements               ; 140                                            ;
+;     Total combinational functions  ; 104                                            ;
+;     Dedicated logic registers      ; 102                                            ;
+; Total registers                    ; 102                                            ;
+; Total pins                         ; 83                                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------+
@@ -154,25 +154,25 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 8           ;
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 8           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-8         ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                         ; Library ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------+---------+
-; packet_to_cell_converter.vhd     ; yes             ; User VHDL File  ; C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd ;         ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                           ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                    ; Library ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------+---------+
+; packet_to_cell_converter.vhd     ; yes             ; User VHDL File  ; /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd ;         ;
++----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -273,8 +273,8 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |packet_to_cell|source_cell[0]~reg0 ;
-; 6:1                ; 17 bits   ; 68 LEs        ; 17 LEs               ; 51 LEs                 ; Yes        ; |packet_to_cell|bit_counter_int[11] ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |packet_to_cell|source_cell[7]~reg0 ;
+; 6:1                ; 17 bits   ; 68 LEs        ; 17 LEs               ; 51 LEs                 ; Yes        ; |packet_to_cell|byte_counter_int[3] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
 
 
@@ -310,7 +310,7 @@ Encoding Type:  One-Hot
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -319,29 +319,29 @@ Encoding Type:  One-Hot
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
-    Info: Processing started: Sun Jan 26 22:30:35 2025
+    Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+    Info: Processing started: Sat Feb  1 13:13:09 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Packet_to_cell_converter -c Packet_to_cell_converter
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file tb_packet_to_cell_backpressure.vhd
-    Info (12022): Found design unit 1: tb_packet_to_cell_backpressure-behavior File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd Line: 9
-    Info (12023): Found entity 1: tb_packet_to_cell_backpressure File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd Line: 6
+    Info (12022): Found design unit 1: tb_packet_to_cell_backpressure-behavior File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd Line: 9
+    Info (12023): Found entity 1: tb_packet_to_cell_backpressure File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file tb_packet_to_cell_zero_padding.vhd
-    Info (12022): Found design unit 1: tb_packet_to_cell_zero_padding-behavior File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd Line: 9
-    Info (12023): Found entity 1: tb_packet_to_cell_zero_padding File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd Line: 6
+    Info (12022): Found design unit 1: tb_packet_to_cell_zero_padding-behavior File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd Line: 9
+    Info (12023): Found entity 1: tb_packet_to_cell_zero_padding File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file packet_to_cell_converter.vhd
-    Info (12022): Found design unit 1: packet_to_cell-rtl File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 29
-    Info (12023): Found entity 1: packet_to_cell File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 6
+    Info (12022): Found design unit 1: packet_to_cell-rtl File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 29
+    Info (12023): Found entity 1: packet_to_cell File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file tb_packet_to_cell_converter.vhd
-    Info (12022): Found design unit 1: packet_to_cell_tb-behavior File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd Line: 9
-    Info (12023): Found entity 1: packet_to_cell_tb File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd Line: 6
+    Info (12022): Found design unit 1: packet_to_cell_tb-behavior File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd Line: 9
+    Info (12023): Found entity 1: packet_to_cell_tb File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd Line: 6
 Info (12127): Elaborating entity "packet_to_cell" for the top level hierarchy
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "state_out[2]" is stuck at GND File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 22
-    Warning (13410): Pin "bit_counter[0]" is stuck at GND File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
-    Warning (13410): Pin "bit_counter[1]" is stuck at GND File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
-    Warning (13410): Pin "bit_counter[2]" is stuck at GND File: C:/Users/Muhamed/Desktop/Quartus files/Quartus_projects/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
+    Warning (13410): Pin "state_out[2]" is stuck at GND File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 22
+    Warning (13410): Pin "bit_counter[0]" is stuck at GND File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
+    Warning (13410): Pin "bit_counter[1]" is stuck at GND File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
+    Warning (13410): Pin "bit_counter[2]" is stuck at GND File: /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd Line: 23
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -350,9 +350,9 @@ Info (21057): Implemented 223 device resources after synthesis - the final resou
     Info (21059): Implemented 69 output pins
     Info (21061): Implemented 140 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 4844 megabytes
-    Info: Processing ended: Sun Jan 26 22:31:07 2025
-    Info: Elapsed time: 00:00:32
-    Info: Total CPU time (on all processors): 00:01:07
+    Info: Peak virtual memory: 409 megabytes
+    Info: Processing ended: Sat Feb  1 13:13:58 2025
+    Info: Elapsed time: 00:00:49
+    Info: Total CPU time (on all processors): 00:00:32
 
 

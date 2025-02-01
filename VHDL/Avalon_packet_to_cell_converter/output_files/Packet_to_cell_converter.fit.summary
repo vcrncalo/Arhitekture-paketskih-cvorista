@@ -1,11 +1,11 @@
-Fitter Status : Successful - Sun Jan 26 22:31:31 2025
-Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Fitter Status : Successful - Sat Feb  1 13:14:24 2025
+Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 Revision Name : Packet_to_cell_converter
 Top-level Entity Name : packet_to_cell
 Family : Cyclone IV E
 Device : EP4CE6F17C6
 Timing Models : Final
-Total logic elements : 128 / 6,272 ( 2 % )
+Total logic elements : 124 / 6,272 ( 2 % )
     Total combinational functions : 104 / 6,272 ( 2 % )
     Dedicated logic registers : 102 / 6,272 ( 2 % )
 Total registers : 102

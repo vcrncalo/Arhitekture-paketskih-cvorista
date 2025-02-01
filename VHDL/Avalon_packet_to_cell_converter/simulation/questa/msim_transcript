@@ -1,0 +1,170 @@
+# do Packet_to_cell_converter_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying /opt/intelFPGA/20.1/modelsim_ase/linuxaloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {/home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:54:38 on Feb 01,2025
+# vcom -reportprogress 300 -93 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity packet_to_cell
+# -- Compiling architecture rtl of packet_to_cell
+# End time: 13:54:39 on Feb 01,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# 
+vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:54:49 on Feb 01,2025
+# vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/packet_to_cell_converter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity packet_to_cell
+# -- Compiling architecture rtl of packet_to_cell
+# End time: 13:54:49 on Feb 01,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:54:49 on Feb 01,2025
+# vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_backpressure.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_packet_to_cell_backpressure
+# -- Compiling architecture behavior of tb_packet_to_cell_backpressure
+# End time: 13:54:49 on Feb 01,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:54:49 on Feb 01,2025
+# vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_converter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity packet_to_cell_tb
+# -- Compiling architecture behavior of packet_to_cell_tb
+# End time: 13:54:49 on Feb 01,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 13:54:49 on Feb 01,2025
+# vcom -reportprogress 300 -work work /home/muhamedc/Arhitekture-paketskih-cvorista/VHDL/Avalon_packet_to_cell_converter/tb_packet_to_cell_zero_padding.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_packet_to_cell_zero_padding
+# -- Compiling architecture behavior of tb_packet_to_cell_zero_padding
+# End time: 13:54:49 on Feb 01,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.packet_to_cell_tb
+# vsim work.packet_to_cell_tb 
+# Start time: 13:54:52 on Feb 01,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.packet_to_cell_tb(behavior)
+# Loading work.packet_to_cell(rtl)
+add wave -position insertpoint  \
+sim:/packet_to_cell_tb/clk \
+sim:/packet_to_cell_tb/reset \
+sim:/packet_to_cell_tb/sink_valid \
+sim:/packet_to_cell_tb/sink_ready \
+sim:/packet_to_cell_tb/sink_data \
+sim:/packet_to_cell_tb/sink_sop \
+sim:/packet_to_cell_tb/sink_eop \
+sim:/packet_to_cell_tb/source_cell \
+sim:/packet_to_cell_tb/source_soc \
+sim:/packet_to_cell_tb/source_eoc \
+sim:/packet_to_cell_tb/source_channel \
+sim:/packet_to_cell_tb/source_valid \
+sim:/packet_to_cell_tb/source_ready \
+sim:/packet_to_cell_tb/byte_counter \
+sim:/packet_to_cell_tb/state_out \
+sim:/packet_to_cell_tb/bit_counter \
+sim:/packet_to_cell_tb/cell_incomplete \
+sim:/packet_to_cell_tb/padding_complete \
+sim:/packet_to_cell_tb/clk_period \
+sim:/packet_to_cell_tb/packet_size \
+sim:/packet_to_cell_tb/cell_size
+run
+# ** Error: Error: source_soc should be '1' at the start of the cell
+#    Time: 845 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: source_valid should be '0' after sending data
+#    Time: 855 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: source_soc should be '1' at the start of the cell
+#    Time: 860 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: source_valid should be '0' after sending data
+#    Time: 870 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: byte_counter should be 70
+#    Time: 875 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: byte_counter should be 0 after transfer
+#    Time: 880 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: source_eoc should be '1' after sending data
+#    Time: 885 ns  Iteration: 0  Instance: /packet_to_cell_tb
+# ** Error: Error: source_channel is incorrect
+#    Time: 890 ns  Iteration: 0  Instance: /packet_to_cell_tb
+vsim work.tb_packet_to_cell_backpressure
+# End time: 13:56:39 on Feb 01,2025, Elapsed time: 0:01:47
+# Errors: 8, Warnings: 0
+# vsim work.tb_packet_to_cell_backpressure 
+# Start time: 13:56:39 on Feb 01,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_packet_to_cell_backpressure(behavior)
+# Loading work.packet_to_cell(rtl)
+add wave -position insertpoint  \
+sim:/tb_packet_to_cell_backpressure/clk \
+sim:/tb_packet_to_cell_backpressure/reset \
+sim:/tb_packet_to_cell_backpressure/sink_valid \
+sim:/tb_packet_to_cell_backpressure/sink_ready \
+sim:/tb_packet_to_cell_backpressure/sink_data \
+sim:/tb_packet_to_cell_backpressure/sink_sop \
+sim:/tb_packet_to_cell_backpressure/sink_eop \
+sim:/tb_packet_to_cell_backpressure/source_cell \
+sim:/tb_packet_to_cell_backpressure/source_soc \
+sim:/tb_packet_to_cell_backpressure/source_eoc \
+sim:/tb_packet_to_cell_backpressure/source_channel \
+sim:/tb_packet_to_cell_backpressure/source_valid \
+sim:/tb_packet_to_cell_backpressure/source_ready \
+sim:/tb_packet_to_cell_backpressure/byte_counter \
+sim:/tb_packet_to_cell_backpressure/state_out \
+sim:/tb_packet_to_cell_backpressure/bit_counter \
+sim:/tb_packet_to_cell_backpressure/cell_incomplete \
+sim:/tb_packet_to_cell_backpressure/padding_complete \
+sim:/tb_packet_to_cell_backpressure/clk_period \
+sim:/tb_packet_to_cell_backpressure/packet_size \
+sim:/tb_packet_to_cell_backpressure/cell_size
+run
+# ** Error: Error: source_soc should be '1' at the start of the cell
+#    Time: 945 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: source_valid should be '0' after sending data
+#    Time: 955 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: source_soc should be '1' at the start of the cell
+#    Time: 960 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: source_valid should be '0' after sending data
+#    Time: 970 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: byte_counter should be 70
+#    Time: 975 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: byte_counter should be 0 after transfer
+#    Time: 980 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: source_eoc should be '1' after sending data
+#    Time: 985 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure
+# ** Error: Error: source_channel is incorrect
+#    Time: 990 ns  Iteration: 0  Instance: /tb_packet_to_cell_backpressure

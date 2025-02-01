@@ -52,9 +52,9 @@ architecture behavior of packet_to_cell_tb is
   signal padding_complete : std_logic := '0';
 
   -- Clock period definition
-  constant CLK_PERIOD : time := 10 ns;
-  constant PACKET_SIZE : integer := 70;
-  constant CELL_SIZE : integer := 64;
+  constant clk_period : time := 10 ns;
+  constant packet_size : integer := 70;
+  constant cell_size : integer := 64;
 
 begin
   -- Instantiate the Unit Under Test (UUT)
@@ -83,18 +83,18 @@ begin
   clk_process: process
   begin
     clk <= '0';
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     clk <= '1';
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
   end process;
 
   -- Stimulus process
   stim_proc: process
   begin
     -- Reset
-    wait for CLK_PERIOD*2;
+    wait for clk_period*2;
     reset <= '0';
-    wait for CLK_PERIOD*2;
+    wait for clk_period*2;
 
     -- Test Case 1: Send 70-byte packet
     sink_valid <= '1';
@@ -106,7 +106,7 @@ begin
       if i = 63 then
         sink_eop <= '1';
       end if;
-      wait for CLK_PERIOD;
+      wait for clk_period;
     end loop;
 
     -- Send remaining 6 bytes
@@ -115,31 +115,31 @@ begin
       if i = 69 then
         sink_eop <= '1';
       end if;
-      wait for CLK_PERIOD;
+      wait for clk_period;
     end loop;
 
     sink_valid <= '0';
     sink_sop <= '0';
     sink_eop <= '0';
 
-    wait for CLK_PERIOD*10;
+    wait for clk_period*10;
 
     -- Check outputs
-    for j in 0 to (PACKET_SIZE - 1) / CELL_SIZE  loop
-        wait for CLK_PERIOD/2;
+    for j in 0 to (packet_size - 1) / cell_size  loop
+        wait for clk_period/2;
         assert source_valid = '1' report "Error: source_valid should be '1' after sending data" severity error;
         assert source_soc = '1' report "Error: source_soc should be '1' at the start of the cell" severity error;
-        wait for CLK_PERIOD;
+        wait for clk_period;
         assert source_valid = '0' report "Error: source_valid should be '0' after sending data" severity error;
     end loop;
 
-    wait for CLK_PERIOD/2;
-    assert byte_counter = std_logic_vector(to_unsigned(PACKET_SIZE, 8)) report "Error: byte_counter should be " & integer'image(PACKET_SIZE) severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
+    assert byte_counter = std_logic_vector(to_unsigned(packet_size, 8)) report "Error: byte_counter should be " & integer'image(packet_size) severity error;
+    wait for clk_period/2;
     assert byte_counter = "00000000" report "Error: byte_counter should be 0 after transfer" severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     assert source_eoc = '1' report "Error: source_eoc should be '1' after sending data" severity error;
-    wait for CLK_PERIOD/2;
+    wait for clk_period/2;
     assert source_eoc = '0' report "Error: source_eoc should be '0' after sending data" severity error;
     assert source_channel = "00000000000000000000000000000001" report "Error: source_channel is incorrect" severity error;
     wait for 500 ns;
