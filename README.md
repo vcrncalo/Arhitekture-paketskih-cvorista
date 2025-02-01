@@ -122,7 +122,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 <img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure">
 
-<p align="center"><em>Slika 7: ModelSim - Backpressure></p>
+<p align="center"><em>Slika 7: ModelSim - Backpressure</p>
 
 #### Zero padding
 
