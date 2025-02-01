@@ -96,9 +96,39 @@ Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite 
 
 ## VHDL
 
-VHDL je softverski alat za dizajn i verifikaciju digitalnih sistema koji inženjerima pruža fleksibilnost, skalabilnost i standardizaciju. Njegova deskriptivna priroda i sintaksa čine ga pristupačnim i efikasnim za upotrebu u različitim aplikacijama od dizajna IC do prototipiranja i verifikacije. 
+VHDL je softverski alat za dizajn i verifikaciju digitalnih sistema koji inženjerima pruža fleksibilnost, skalabilnost i standardizaciju. Njegova deskriptivna priroda i sintaksa čine ga pristupačnim i efikasnim za upotrebu u različitim aplikacijama od dizajna IC do prototipiranja i verifikacije.
 
 Za ovaj projektni zadatak se koristi glavni VHDL kod i tri testbench VHDL koda, jedan za konverter paketa u ćelije, drugi za backpressure slučaj i treći za zero padding slučaj.
+
+### ModelSim
+
+ModelSim je korišten kako bi se prikazali signali za slučaj bez backpressure-a i bez zero padding-a, slučaj sa zero padding-om i slučaj sa backpressure-om. 
+
+Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti:
+- `sink_data`,
+- `source_cell`,
+- `source_channel`,
+- `byte_counter`,
+- `state_out`,
+- `bit_counter`.
+
+#### Packet-to-cell converter
+
+<img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell">
+
+<p align="center"><em>Slika 6: ModelSim - Packet-to-cell converter</em></p>
+
+#### Backpressure
+
+<img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure">
+
+<p align="center"><em>Slika 7: ModelSim - Backpressure></p>
+
+#### Zero padding
+
+<img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding">
+
+<p align="center"><em>Slika 8: ModelSim - Zero padding</em></p>
 
 ## Reference
 
