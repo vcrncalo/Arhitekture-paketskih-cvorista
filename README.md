@@ -58,6 +58,8 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 - `byte_counter[7:0]` - 8-bitni signal koji je brojač bajta i prati broj prenesenih bajta;
 - `state` - Trenutno stanje FSM-a (Idle, SENDING_CELL);
 - `bit_counter` - Brojač bita koji prati broj prenesenih bita.
+- `cell_incomplete` - Ovaj signal označava da trenutna ćelija (bilo paket ili blok podataka) još nije u potpunosti popunjena te da je potrebna dodatna obrada ili unos podataka za njezino dovršavanje.
+- `padding_complete` - Ovaj signal označava da je postupak dopunjavanja zadnje ćelije, koja prirodno nije ispunjena svim potrebnim podacima, završen, odnosno da su ubačeni potrebni dodatni podaci (najčešće nule ili unaprijed definirani uzorak) kako bi se osigurala fiksna veličina ćelije te pripremila za daljnju obradu ili slanje.
 
 ### Zero padding
 
