@@ -1,9 +1,17 @@
 # Arhitekture paketskih čvorišta - Konverter paketa u ćelije
 
+## Uvod
+
+Ovaj projekat ima za cilj dizajniranje i implementaciju konvertera paketa u ćelije koristeći Avalon ST interfejs. Takav sistem omogućava bolje upravljanje podacima, preciznije vremensko usklađivanje i prilagođavanje specifičnim mrežnim protokolima. Posebna pažnja posvećena je mehanizmima za upravljanje backpressure-om i zero padding-om, čime se obezbjeđuje pouzdana i efikasna obrada podataka u realnim scenarijima.
+
+Implementacija konvertera oslanja se na korištenje VHDL jezika za hardverski dizajn, što omogućava visoke performanse i fleksibilnost. U okviru projekta korišteni su softverski alati kao što su ModelSim za simulaciju i vizualizaciju testbench scenarija i Quartus Prime Lite za sintezu i analizu digitalnog dizajna. Pored toga, prikazani su WaveDrom dijagrami i FSM modeli koji omogućavaju detaljnu vizualizaciju toka podataka i ponašanja sistema.
+
+---
+
 ## Opis projekta
 
-Cilj ovog projekta je modeliranje i implementacija sklopa za konverziju paketa u ćelije. 
-Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvoljne dužine (64 - 1500 bajta) i generiše izlazni tok fiksnih ćelija dužine 64 bajta. 
+Cilj ovog projekta je modeliranje i implementacija sklopa za konverziju paketa u ćelije.
+Projekat koristi 8-bitni Avalon ST interfejs za prijem Ethernet okvira proizvoljne dužine (64 - 1500 bajta) i generiše izlazni tok fiksnih ćelija dužine 64 bajta.
 
 ### Specifikacija:
 
@@ -99,7 +107,7 @@ Dvije vijugave linije na ovom i ostalim graficima označavaju skokove, tj. radi 
 
 Blok "Finite State Machine" dodaje "state machine" u DSP Builder dizajn. Finite State Machine se može opisati koristeći FSM specifikacijski jezik, koji se unosi u tekstualnu datoteku. Zatim, ta tekstualna datoteka se učita koristeći Finite State Machine blok i povezuju se ulazni i izlazni portovi bloka FSM-a s ostatkom dizajna. DSP Builder zatim generiše odgovarajuće loop (ForLoop) i lookup-table (LUT) strukture za implementaciju state-machine-a opisanog u tekstualnoj datoteci. Međutim, ti ForLoop i LUT blokovi nisu vidljivi u DSP Builder dizajnu. DSP Builder prevodi ForLoop i LUT blokove u RTL s automatskim mapiranjem uređaja i balansiranjem latencije s ostatkom DSP Builder dizajna. DSP Builder pruža primjer dizajna konačnog automata, demo_fsm.mdl, koji pokazuje kako koristiti blok Finite State Machine za filtriranje specifičnih numeričkih vrijednosti iz ulaznog toka. [^4]    
 
-Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer** u **Quartus Prime Lite** softveru kojem se može pristuputi klikom na **Tools** -> **Netlist viewers** -> **FSM state viewer**.
+Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer** u **Quartus Prime Lite** softveru kojem se može pristuputi klikom na **Tools** -> **Netlist viewers** -> **State Machine Viewer**.
 
 *FSM state viewer je prikazan na slici 5:*
 
@@ -119,11 +127,23 @@ Kao pomoć pri kreiranju dijagrama FSM-a, može se koristiti **FSM state viewer*
 
 ---
 
+## RTL viewer
+
+RTL (Register Transfer Level) prikazuje kako je HDL kod (VHDL ili Verilog) preveden u hardverske komponente kao što su registri, multiplekseri i druge digitalne komponente. U suštini, RTL prikazuje grafičku reprezentaciju digitalnog dizajna na nivou registara i logičkih operacija.
+
+RTL viewer-u se može pristuputi klikom na **Tools** -> **Netlist viewers** -> **RTL Viewer**.
+
+<p align="center">
+<img src="VHDL/Slike/RTL_state_viewer.png" alt="RTL_state_viewer"></img>
+<em>Slika 7: RTL - Register Transfer Level</em>
+<br>
+</p>
+
+---
+
 ## VHDL
 
-VHDL je softverski alat za dizajn i verifikaciju digitalnih sistema koji inženjerima pruža fleksibilnost, skalabilnost i standardizaciju. Njegova deskriptivna priroda i sintaksa čine ga pristupačnim i efikasnim za upotrebu u različitim aplikacijama od dizajna IC do prototipiranja i verifikacije.
-
-Za ovaj projektni zadatak se koristi glavni VHDL kod i tri testbench VHDL koda, jedan za konverter paketa u ćelije, drugi za backpressure slučaj i treći za zero padding slučaj.
+VHDL je jezik za opis hardvera koji se koristi za modeliranje, dizajn i verifikaciju digitalnih sistema. Omogućava inženjerima da opišu strukturu i ponašanje digitalnih kola na visokom nivou apstrakcije. Koristi se za dizajn integrisanih kola (IC), FPGA uređaja i drugih digitalnih sistema.
 
 ### ModelSim
 
@@ -141,7 +161,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell.png" alt="tb_packet_to_cell"></img>
-<em>Slika 7: ModelSim - Packet-to-cell converter</em>
+<em>Slika 8: ModelSim - Packet-to-cell converter</em>
 <br>
 </p>
 
@@ -149,7 +169,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell_backpressure.png" alt="tb_packet_to_cell_backpressure"></img>
-<em>Slika 8: ModelSim - Backpressure</em>
+<em>Slika 9: ModelSim - Backpressure</em>
 <br>
 </p>
 
@@ -157,7 +177,7 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 
 <p align="center">
 <img src="VHDL/Slike/tb_packet_to_cell_zero_padding.png" alt="tb_packet_to_cell_zero_padding"></img> 
-<em>Slika 9: ModelSim - Zero padding</em>
+<em>Slika 10: ModelSim - Zero padding</em>
 <br>
 </p>
 
@@ -166,8 +186,18 @@ Sljedeći signali su prikazani u heksadecimalnom formatu radi bolje čitljivosti
 <p align="center">
 <img src="VHDL/Slike/compilation_report.png" alt="compilation_report"></img>
 <br>
-<em>Slika 10: Compilation report</em>
+<em>Slika 11 Compilation report</em>
 </p> 
+
+---
+
+## Zaključak
+
+Ovaj projekat implementira konverter paketa u ćelije u VHDL-u, uključujući testbench-ove za testiranje posebnih scenarija. Također, projekat jasno pokazuje uspješnu implementaciju kao i testiranje konvertera paketa u ćelije, koristeći VHDL. Dizajn uključuje Avalon interfejs, a postoje testbench-ovi za scenarije backpressure-a i zero padding-a. Projekat također uključuje WaveDrom dijagrame za vizualizaciju konverzije paketa u ćelije, backpressure-a i funkcionalnosti popunjavanja nulama. FSM dijagram nam pomaže vizualizirati stanja konvertera paketa u ćelije, dok nam RTL prikazuje digitalni dizajn na nivou registara i logičkih operacija.
+
+Primjena Avalon ST interfejsa omogućava fleksibilnu integraciju i optimizaciju toka podataka, dok testbench-ovi pružaju validaciju ispravnog rada u različitim scenarijima kao što su backpressure i zero padding. 
+
+Sveobuhvatno testiranje kroz ModelSim simulacije i uspješan prikaz signala potvrđuju funkcionalnost i pouzdanost dizajna. Projekat predstavlja značajan korak u arhitekturi paketskih čvorišta, pružajući modularno i prilagodljivo rješenje koje može naći široku primjenu u mrežnim i komunikacionim sistemima.
 
 ---
 
